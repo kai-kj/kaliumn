@@ -80,7 +80,7 @@ void CursorVisibility(int visibility){
 		cursor.bVisible = TRUE;
 	}
 	//Set visibility
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 }
 /*
 CursorPosition(int x, int y)
@@ -107,5 +107,5 @@ void CursorPosition(int x, int y){
     position.X = x;
     position.Y = y;
     //Set cursor position
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
