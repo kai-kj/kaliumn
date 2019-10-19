@@ -1,4 +1,10 @@
 /*
+cmd.h
+v0.1(2019-10-19)
+Please include windows.h
+*/
+
+/*
 ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity)
 Sets console text colour using SetConsoleTextAttribute(windows.h)
 https://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
