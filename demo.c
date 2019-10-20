@@ -10,10 +10,10 @@ gcc demo.c -o demo.exe
 int main(void){
 	//ConsoleColour() demo
 	int i, j, k, l;
-	for(i = 0; i < 7; i++){
-		for(j = 0; j < 7; j++){
-			for(k = 0; k < 1; k++){
-				for(l = 0; l < 1; l++){
+	for(i = 0; i < 8; i++){
+		for(j = 0; j < 8; j++){
+			for(k = 0; k < 2; k++){
+				for(l = 0; l < 2; l++){
 					ConsoleColour(i, j, k, l);
 					printf("ConsoleColour(%d, %d, %d, %d);\n", i, j, k, l);
 				}
@@ -21,6 +21,6 @@ int main(void){
 		}
 	}
 	ConsoleColour(7, 0, 0, 0);
-	printf("press any key to continue...");
+	printf("press ENTER to continue...");
 	getchar();
 }

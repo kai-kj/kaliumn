@@ -1,6 +1,6 @@
 /*
 cmd.h
-v0.1(2019-10-19)
+v0.11(2019-10-20)
 Please include windows.h
 */
 
@@ -49,14 +49,14 @@ void ConsoleColour(int foreground, int background, int foreground_intensity, int
 	if(background < 0 || background > 7){
 		background = 0;
 	}
-	if(foreground_intensity != 0 || foreground_intensity != 1){
+	if(foreground_intensity < 0 || foreground_intensity > 1){
 		foreground_intensity = 0;
 	}
-	if(background_intensity != 0 || background_intensity != 1){
+	if(background_intensity < 0 || background_intensity > 1){
 		background_intensity = 0;
 	}
 	//Set colours
-	int colour = (16 * background + 8 * background_intensity)+ foreground + 8 * foreground_intensity;
+	int colour = 16 * background + 128 * background_intensity + foreground + 8 * foreground_intensity;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
 }
 /*
