@@ -18,7 +18,7 @@ int foreground
 5: Magenta
 6: Yellow
 7: White
-defualt: White
+default: White
 
 int background
 0: Black
@@ -29,17 +29,17 @@ int background
 5: Magenta
 6: Yellow
 7: White 
-defualt: Black
+default: Black
 
 int foreground_intensity
 0: False
 1: True
-defualt: False
+default: False
 
 int background_intensity
 0: False
 1: True
-defualt: False
+default: False
 */
 void ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity){
 	//Check inputs
@@ -67,7 +67,7 @@ https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo
 int visibility
 0: invisible
 1: visible
-deafult: visible
+default: visible
 */
 void CursorVisibility(int visibility){
 	CONSOLE_CURSOR_INFO cursor;
@@ -89,11 +89,11 @@ https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition
 
 int x
 x coord (>= 0)
-defualt: 0
+default: 0
 
 int y
 y coord (>= 0)
-defualt: 0
+default: 0
 */
 void CursorPosition(int x, int y){
 	//Check input
