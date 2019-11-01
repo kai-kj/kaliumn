@@ -10,8 +10,7 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 
 ![cmd_colours](cmd_colours.png)
 
-##### *int* foreground
-
+`int foreground`
 0: Black
 1: Blue
 2: Green
@@ -22,8 +21,7 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 7: White
 default: White
 
-##### *int* background
-
+`int background`
 0: Black
 1: Blue
 2: Green
@@ -34,14 +32,12 @@ default: White
 7: White 
 default: Black
 
-##### *int* foreground_intensity
-
+`int foreground_intensity`
 0: False
 1: True
 default: False
 
-##### *int* background_intensity
-
+`int background_intensity`
 0: False
 1: True
 default: False
@@ -49,7 +45,7 @@ default: False
 ### CursorVisibility()
 Changes console cursor visibility using [SetConsoleCursorInfo()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo) from [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
-##### *int* visibility
+`int visibility`
 0: invisible
 1: visible
 default: visible
@@ -57,35 +53,35 @@ default: visible
 ### CursorPosition()
 Changes cursor position using [SetConsoleCursorPosition()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition) [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
-##### *int* x
+`int x`
 x coord (>= 0)
 default: 0
 
-##### *int* y
+`int y`
 y coord (>= 0)
 default: 0
 
 ### Startup()
 Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
 
-##### *int* height
+`int height`
 window height (>= 0)
 default: 0
 
-##### *int* width
+`int width`
 window width (>= 0)
 default: 0
 
-##### *char* title
+`char title`
 console title
 
 ### PlayAudio()
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to play sounds.
 
-##### *char* path
+`char path`
 path to audio file(mp3)
 
-##### *int* repeat
+`int repeat`
 0: false
 1: true
 default: 0
@@ -93,19 +89,18 @@ default: 0
 ### PauseAudio()
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to pause sounds.
 
-##### *char* path
+`char path`
 path to audio file(mp3)
 
 ### ResumeAudio()
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to resume paused sounds.
 
-##### *char* path
+`char path`
 path to audio file(mp3)
 
 ### StopAudio()
 
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to stop paused sounds.
 
-##### *char* path
-
+`char path`
 path to audio file(mp3)
