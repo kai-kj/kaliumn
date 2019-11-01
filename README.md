@@ -10,14 +10,14 @@ v0.13(2019-11-01)
 
 ##### Table Of Contents
 
-* [ConsoleColour()](#consolecolour())
+* [ConsoleColour()](#consolecolour)
 * [CursorVisibility()](#cursorvisibility)
-* [CursorPosition()](#cursorposition())
-* [Startup()](#startup())
-* [PlayAudio()](#playaudio())
-* [PauseAudio()](#pauseaudio())
-* [ResumeAudio()](#resumeaudio())
-* [StopAudio()](#stopaudio())
+* [CursorPosition()](#cursorposition)
+* [Startup()](#startup)
+* [PlayAudio()](#playaudio)
+* [PauseAudio()](#pauseaudio)
+* [ResumeAudio()](#resumeaudio)
+* [StopAudio()](#stopaudio)
 
 ----
 
