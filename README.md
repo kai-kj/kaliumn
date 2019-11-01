@@ -21,7 +21,7 @@ v0.13(2019-11-01)
 
 ----
 
-### ConsoleColour()
+### ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity)
 
 Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsoft.com/en-us/windows/console/setconsoletextattribute) from [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
@@ -63,7 +63,7 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 
 ----
 
-### CursorVisibility()
+### CursorVisibility(int visibility)
 
 Changes console cursor visibility using [SetConsoleCursorInfo()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo) from [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
@@ -74,7 +74,7 @@ Changes console cursor visibility using [SetConsoleCursorInfo()](https://docs.mi
 
 ----
 
-### CursorPosition()
+### CursorPosition(int x, int y)
 
 Changes cursor position using [SetConsoleCursorPosition()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition) [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
@@ -88,7 +88,7 @@ Changes cursor position using [SetConsoleCursorPosition()](https://docs.microsof
 
 ----
 
-### Startup()
+### Startup(int width, int height, char title[100])
 
 Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
 
@@ -106,7 +106,7 @@ Changes the screen size, hides the cursor, sets the console encoding to utf-8 an
 
 ----
 
-### PlayAudio()
+### PlayAudio(char path[100], int repeat)
 
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to play sounds.
 
@@ -121,7 +121,7 @@ Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd75716
 
 ----
 
-### PauseAudio()
+### PauseAudio(char path[100])
 
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to pause sounds.
 
@@ -131,7 +131,7 @@ Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd75716
 
 ----
 
-### ResumeAudio()
+### ResumeAudio(char path[100])
 
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to resume paused sounds.
 
@@ -141,7 +141,7 @@ Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd75716
 
 ----
 
-### StopAudio()
+### StopAudio(char path[100])
 
 Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to stop paused sounds.
 
