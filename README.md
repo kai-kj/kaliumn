@@ -10,14 +10,14 @@ v0.13(2019-11-01)
 
 ##### Table Of Contents
 
-* [ConsoleColour()](#consolecolourint-foreground-int-background-int-foreground_intensity-int-background_intensity)
-* [CursorVisibility()](#cursorvisibilityint-visibility)
-* [CursorPosition()](#cursorpositionint-x-int-y)
-* [Startup()](#startupint-width-int-height-char-title100)
-* [PlayAudio()](#playaudiochar-path100-int-repeat)
-* [PauseAudio()](#pauseaudiochar-path100)
-* [ResumeAudio()](#resumeaudiochar-path100)
-* [StopAudio()](##stopaudiochar-path100)
+* [ConsoleColour()](#consolecolour-int-foreground-int-background-int-foreground_intensity-int-background_intensity)
+* [CursorVisibility()](#cursorvisibility-int-visibility)
+* [CursorPosition()](#cursorposition-int-x-int-y)
+* [Startup()](#start-upintwidth-int-height-char-title100)
+* [PlayAudio()](#playaudio-char-path100-int-repeat)
+* [PauseAudio()](#pauseaudio-char-path100)
+* [ResumeAudio()](#resumeaudio-char-path100)
+* [StopAudio()](##stopaudio-char-path100)
 
 ----
 
