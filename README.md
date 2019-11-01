@@ -10,29 +10,29 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 
 ![cmd_colours](cmd_colours.png)
 
-`int foreground`
+| *int* foreground |
+| ---------------- |
+| 0: Black         |
+| 1: Blue          |
+| 2: Green         |
+| 3: Cyan          |
+| 4: Red           |
+| 5: Magenta       |
+| 6: Yellow        |
+| 7: White         |
+| default: White   |
 
-0: Black
-1: Blue
-2: Green
-3: Cyan
-4: Red
-5: Magenta
-6: Yellow
-7: White
-default: White
-
-`int background`
-
-0: Black
-1: Blue
-2: Green
-3: Cyan
-4: Red
-5: Magenta
-6: Yellow
-7: White 
-default: Black
+| *int* background |
+| ---------------- |
+| 0: Black         |
+| 1: Blue          |
+| 2: Green         |
+| 3: Cyan          |
+| 4: Red           |
+| 5: Magenta       |
+| 6: Yellow        |
+| 7: White         |
+| default: White   |
 
 `int foreground_intensity`
 
