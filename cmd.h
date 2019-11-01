@@ -1,6 +1,6 @@
 /*
 cmd.h
-v0.11(2019-10-20)
+v0.12(2019-11-01)
 Please include windows.h
 */
 
@@ -41,18 +41,23 @@ int background_intensity
 1: True
 default: False
 */
-void ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity){
+void ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity)
+{
 	//Check inputs
-	if(foreground < 0 || foreground > 7){
+	if(foreground < 0 || foreground > 7)
+	{
 		foreground = 7;
 	}
-	if(background < 0 || background > 7){
+	if(background < 0 || background > 7)
+	{
 		background = 0;
 	}
-	if(foreground_intensity < 0 || foreground_intensity > 1){
+	if(foreground_intensity < 0 || foreground_intensity > 1)
+	{
 		foreground_intensity = 0;
 	}
-	if(background_intensity < 0 || background_intensity > 1){
+	if(background_intensity < 0 || background_intensity > 1)
+	{
 		background_intensity = 0;
 	}
 	//Set colours
@@ -69,14 +74,18 @@ int visibility
 1: visible
 default: visible
 */
-void CursorVisibility(int visibility){
+void CursorVisibility(int visibility)
+{
 	CONSOLE_CURSOR_INFO cursor;
 	//dwSize: "The percentage of the character cell that is filled by the cursor. This value is between 1 and 100."
 	//more information on CONSOLE_CURSOR_INFO: https://docs.microsoft.com/en-us/windows/console/console-cursor-info-str
 	cursor.dwSize = 100;
-	if(visibility == 0){
+	if(visibility == 0)
+	{
 		cursor.bVisible = FALSE;
-	}else{
+	}
+	else
+	{
 		cursor.bVisible = TRUE;
 	}
 	//Set visibility
@@ -95,12 +104,15 @@ int y
 y coord (>= 0)
 default: 0
 */
-void CursorPosition(int x, int y){
+void CursorPosition(int x, int y)
+{
 	//Check input
-	if(x < 0){
+	if(x < 0)
+	{
 		x = 0;
 	}
-	if(y < 0){
+	if(y < 0)
+	{
 		y = 0;
 	}
 	COORD position;
@@ -108,4 +120,45 @@ void CursorPosition(int x, int y){
     position.Y = y;
     //Set cursor position
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
+}
+/*
+Startup(int width, int height, char title)
+Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
+
+int height
+window height (>= 0)
+default: 0
+
+int width
+window width (>= 0)
+default: 0
+
+char title
+console title
+*/
+void Startup(int width, int height, char title[100])
+{
+	char screenSize[50];
+	sprintf(screenSize, "MODE %d, %d", width, height);
+	//Check input
+	if(height < 0)
+	{
+		height = 0;
+	}
+	if(width < 0)
+	{
+		width = 0;
+	}
+	//Clear screen
+	system("cls");
+	//Hide cursor
+	printf("\e[?25l");
+	//Set window size
+	system(screenSize);
+	//Use UTF-8
+	system("chcp 65001");
+	//Set console title
+	SetConsoleTitle(title);
+	//Clear screen
+	system("cls");
 }
