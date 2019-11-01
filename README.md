@@ -1,4 +1,8 @@
+----
+
 # cmd.h
+
+----
 
 v0.13(2019-11-01)
 
@@ -7,13 +11,13 @@ v0.13(2019-11-01)
 ##### Table Of Contents
 
 * [ConsoleColour()](#ConsoleColour())
-* [CursorVisibility()](CursorVisibility)
-* [CursorPosition()](CursorPosition())
-* [Startup()](Startup())
-* [PlayAudio()](PlayAudio())
-* [PauseAudio()](PauseAudio())
-* [ResumeAudio()](ResumeAudio())
-* [StopAudio()](StopAudio())
+* [CursorVisibility()](#CursorVisibility)
+* [CursorPosition()](#CursorPosition())
+* [Startup()](#Startup())
+* [PlayAudio()](#PlayAudio())
+* [PauseAudio()](#PauseAudio())
+* [ResumeAudio()](#ResumeAudio())
+* [StopAudio()](#StopAudio())
 
 ----
 
