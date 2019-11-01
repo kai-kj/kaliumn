@@ -10,7 +10,7 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 
 ![cmd_colours](cmd_colours.png)
 
-| *int* foreground |
+| *int* foreground (default: White) |
 | ---------------- |
 | 0: Black         |
 | 1: Blue          |
@@ -20,9 +20,8 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 | 5: Magenta       |
 | 6: Yellow        |
 | 7: White         |
-| default: White   |
 
-| *int* background |
+| *int* background (default: White) |
 | ---------------- |
 | 0: Black         |
 | 1: Blue          |
@@ -32,54 +31,46 @@ Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsof
 | 5: Magenta       |
 | 6: Yellow        |
 | 7: White         |
-| default: White   |
 
-| *int* foreground_intensity |
+| *int* foreground_intensity (default: False) |
 | -------------------------- |
 | 0: False                   |
 | 1: True                    |
-| default: False             |
 
-| *int* background_intensity |
+| *int* background_intensity (default: False) |
 | -------------------------- |
 | 0: False                   |
 | 1: True                    |
-| default: False             |
 
 ### CursorVisibility()
 Changes console cursor visibility using [SetConsoleCursorInfo()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo) from [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
-| *int* visibility |
+| *int* visibility (default: Visible) |
 | -------------------------- |
 | 0: invisible                |
 | 1: visible          |
-| default: visible             |
 
 ### CursorPosition()
 Changes cursor position using [SetConsoleCursorPosition()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition) [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
 
-| *int* x        |
+| *int* x (default: 0)       |
 | -------------- |
 | x coord (>= 0) |
-| default: 0     |
 
-| *int* y       |
+| *int* y (default: 0)      |
 | -------------- |
 | y coord (>= 0) |
-| default: 0     |
 
 ### Startup()
 Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
 
-| *int* height       |
+| *int* height (default: 0)      |
 | -------------- |
 | window height (>= 0) |
-| default: 0     |
 
-| *int* width       |
+| *int* width (default: 0)      |
 | -------------- |
 | window width (>= 0) |
-| default: 0     |
 
 | *char* title  |
 | ------------- |
@@ -92,11 +83,10 @@ Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd75716
 | ----------------------- |
 | path to audio file(mp3) |
 
-| *int* repeat |
+| *int* repeat (default: 0) |
 | ------------ |
 | 0: false     |
 | 1: true      |
-| default: 0   |
 
 ### PauseAudio()
 
