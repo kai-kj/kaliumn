@@ -1,8 +1,3 @@
-/*---LAPTOP---
-cd C:\Users\Kitagawa-Jones\Desktop\programing\Header
-gcc demo.c -o demo.exe
-
-*/
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>

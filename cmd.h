@@ -1,6 +1,6 @@
 /*
 cmd.h
-v0.13(2019-11-01)
+v0.20(2019-11-07)
 Please include windows.h and link the winmm.dll library(for mingw add "-lwinmm").
 */
 
@@ -128,12 +128,12 @@ void CursorPosition(int x, int y)
 Startup(int width, int height, char title)
  Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
 
- int height
-  window height (>= 0)
+ int width
+  window width (characters) (>= 0)
   default: 0
 
- int width
-  window width (>= 0)
+ int height
+  window height (characters) (>= 0)
   default: 0
 
  char title
@@ -142,7 +142,6 @@ Startup(int width, int height, char title)
 void Startup(int width, int height, char title[100])
 {
 	char screenSize[100];
-	sprintf(screenSize, "MODE %d, %d", width, height);
 	//Check input
 	if(height < 0)
 	{
@@ -152,6 +151,7 @@ void Startup(int width, int height, char title[100])
 	{
 		width = 0;
 	}
+	sprintf(screenSize, "MODE %d, %d", width, height);
 	//Clear screen
 	system("cls");
 	//Hide cursor
@@ -203,6 +203,7 @@ void PlayAudio(char path[100], int repeat)
 	//Start
 	mciSendString(play, NULL, 0, 0);
 }
+
 /*
 PauseAudio(char path[100])
  Uses mciSendString() to pause sounds.
@@ -218,6 +219,7 @@ void PauseAudio(char path[100])
 	//Pause
 	mciSendString(pause, NULL, 0, 0);
 }
+
 /*
 ResumeAudio(char path[100])
  Uses mciSendString() to resume paused sounds.
@@ -233,6 +235,7 @@ void ResumeAudio(char path[100])
 	//Resume
 	mciSendString(resume, NULL, 0, 0);
 }
+
 /*
 StopAudio(char path[100])
  Uses mciSendString() to stop sounds.
@@ -247,4 +250,85 @@ void StopAudio(char path[100])
 	sprintf(stop, "stop %s", path);
 	//Stop
 	mciSendString(stop, NULL, 0, 0);
+}
+
+/*
+*LoadTexture(char path[100])
+ Loads texture to *int to be drawn by Draw()
+ Texture format
+
+  height width
+  [pixel 0, 0] [pixel 1, 0] [pixel 2, 0]
+  [pixel 0, 1] [pixel 1, 1] [pixel 2, 1] . . .
+  [pixel 0, 2] [pixel 1, 2] [pixel 2, 2]
+                   .
+                   .
+                   .
+
+  height: height of texture
+  width: width of texture
+  [pixel x, y]: color code of pixel(same code as ConsoleColor())
+   first digit: color
+   second digit: intensity (intensity 2 == trasparent)
+
+ char path
+  path to file
+*/
+int *LoadTexture(char path[100])
+{
+	int i, j;
+	int x, y;
+	FILE *fp = fopen(path,"r");
+	fscanf(fp, "%d %d", &x, &y);
+
+	int *texture = (int *)malloc((x * y + 2) * sizeof(int));
+
+	texture[0] = x;
+	texture[1] = y;
+
+	for(i = 0; i < y; ++i)
+	{
+		for(j = 0; j < x; ++j)
+		{
+			fscanf(fp, "%d", &texture[(i * x) + j + 2]);
+			if(j < x)
+			{
+				fseek(fp, 1, SEEK_CUR);
+			}
+		}
+	}
+
+	fclose(fp);
+
+	return texture;
+}
+
+/*
+Draw(int *texture)
+ Draws texture loaded by *LoadTexture()
+
+ int *texture
+  texture
+*/
+void Draw(int *texture)
+{
+	int i, j;
+	int x = texture[0];
+	int y = texture[1];
+
+	for(i = 0; i < y; ++i)
+	{
+		for (int j = 0; j < x; ++j)
+		{
+			ConsoleColour(0, texture[(i * x) + j + 2] / 10 % 10, 0, texture[(i * x) + j + 2] % 10);
+			printf("  ");
+		}
+
+		if(i < y - 1)
+		{
+			printf("\n");
+		}
+
+	}
+
 }
