@@ -4,9 +4,11 @@ v0.20(2019-11-07)
 Please include windows.h and link the winmm.dll library(for mingw add "-lwinmm").
 */
 
+#include <windows.h>
+
 /*
-ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity)
- Sets console text colour using SetConsoleTextAttribute(windows.h)
+ConsoleColor(int foreground, int background, int foreground_intensity, int background_intensity)
+ Sets console text Color using SetConsoleTextAttribute(windows.h)
  ttps://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
 
  int foreground
@@ -41,7 +43,7 @@ ConsoleColour(int foreground, int background, int foreground_intensity, int back
   1: True
   default: False
 */
-void ConsoleColour(int foreground, int background, int foreground_intensity, int background_intensity)
+void ConsoleColor(int foreground, int background, int foreground_intensity, int background_intensity)
 {
 	//Check inputs
 	if(foreground < 0 || foreground > 7)
@@ -60,9 +62,9 @@ void ConsoleColour(int foreground, int background, int foreground_intensity, int
 	{
 		background_intensity = 0;
 	}
-	//Set colours
-	int colour = 16 * background + 128 * background_intensity + foreground + 8 * foreground_intensity;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
+	//Set Colors
+	int Color = 16 * background + 128 * background_intensity + foreground + 8 * foreground_intensity;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Color);
 }
 
 /*
@@ -164,6 +166,23 @@ void Startup(int width, int height, char title[100])
 	SetConsoleTitle(title);
 	//Clear screen
 	system("cls");
+}
+
+void ScreenSize(int width, int height)
+{
+	char screenSize[100];
+	//Check input
+	if(height < 0)
+	{
+		height = 0;
+	}
+	if(width < 0)
+	{
+		width = 0;
+	}
+	sprintf(screenSize, "MODE %d, %d", width, height);
+	//Set window size
+	system(screenSize);
 }
 
 /*
@@ -279,7 +298,7 @@ int *LoadTexture(char path[100])
 	int i, j;
 	int x, y;
 	FILE *fp = fopen(path,"r");
-	fscanf(fp, "%d %d", &x, &y);
+	fscanf(fp, "%d, %d", &x, &y);
 
 	int *texture = (int *)malloc((x * y + 2) * sizeof(int));
 
@@ -310,23 +329,33 @@ Draw(int *texture)
  int *texture
   texture
 */
-void Draw(int *texture)
+void Draw(int *texture, int xPos, int yPos)
 {
 	int i, j;
 	int x = texture[0];
 	int y = texture[1];
 
+	CursorPosition(xPos * 2, yPos);
+
 	for(i = 0; i < y; ++i)
 	{
 		for (int j = 0; j < x; ++j)
 		{
-			ConsoleColour(0, texture[(i * x) + j + 2] / 10 % 10, 0, texture[(i * x) + j + 2] % 10);
-			printf("  ");
+			if(texture[(i * x) + j + 2] == 99)
+			{
+				CursorPosition(xPos * 2 + j * 2 + 2, yPos + i);
+			}
+			else
+			{
+				ConsoleColor(0, texture[(i * x) + j + 2] / 10 % 10, 0, texture[(i * x) + j + 2] % 10);
+				printf("  ");
+			}
+
 		}
 
 		if(i < y - 1)
 		{
-			printf("\n");
+			CursorPosition(xPos * 2, yPos + i);
 		}
 
 	}
