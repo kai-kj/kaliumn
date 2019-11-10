@@ -22,9 +22,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ## Usage example
 
-**Bouncing ball**
-
-<details><summary>code</summary>
+<details><summary>Bouncing ball</summary>
 main.c:
 
 ```c
@@ -109,6 +107,7 @@ texture:
 99 99 40 40 40 40 99 99 
 ```
 </details>
+
 ## Contributing
 
 1. Fork it (<https://github.com/k390983/cmd.h/fork>)
