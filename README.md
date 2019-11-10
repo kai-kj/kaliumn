@@ -48,7 +48,7 @@ int main(void)
 <details><summary>Bouncing ball</summary>
 main.c:
 
-```
+```c
 #include <stdlib.h>
 #include <stdio.h>
 #include "cmd.h"
