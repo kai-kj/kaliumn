@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "cmd.h"
+#include "../cmd.h"
 int main(void){
 	//ConsoleColour() demo
 	int i, j, k, l;

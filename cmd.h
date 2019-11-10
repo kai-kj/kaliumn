@@ -6,7 +6,7 @@ Please include windows.h and link the winmm.dll library(for mingw add "-lwinmm")
 
 #include <windows.h>
 
-int **canvas;
+int *canvas;
 
 /*
 ConsoleColor(int foreground, int background, int foreground_intensity, int background_intensity)
@@ -324,14 +324,41 @@ int *LoadTexture(char path[100])
 	return texture;
 }
 
-void Init(int width, int height)
+void Init(int width, int height, int color)
 {
-	int i;
+	int i, j;
+	
+	canvas = (int *)malloc((width * height + 2) * sizeof(int));
 
-	canvas = (int **)malloc(width * sizeof(int *));
-	for(i = 0; i < width; i++)
+	canvas[0] = width;
+	canvas[1] = height;
+
+	for(i = 0; i < height; ++i)
 	{
-		canvas[i] = (int *)malloc(height * sizeof(int));
+		for(j = 0; j < width; ++j)
+		{
+			canvas[(i * width) + j + 2] = color;
+
+		}
+
+	}
+
+}
+
+void CleanCanvas(int color)
+{
+	int i, j;
+	int width = canvas[0];
+	int height = canvas[1];
+	
+	for(i = 0; i < height; ++i)
+	{
+		for(j = 0; j < width; ++j)
+		{
+			canvas[(i * width) + j + 2] = color;
+
+		}
+
 	}
 
 }
@@ -381,8 +408,8 @@ void Draw(int *texture, int xPos, int yPos)
 	int i, j;
 	int x = texture[0];
 	int y = texture[1];
-
-	CursorPosition(xPos * 2, yPos);
+	int width = canvas[0];
+	int height = canvas[1];
 
 	for(i = 0; i < y; ++i)
 	{
@@ -390,7 +417,8 @@ void Draw(int *texture, int xPos, int yPos)
 		{
 			if(texture[(i * x) + j + 2] != 99)
 			{
-				canvas[yPos + i][xPos + j] = texture[(i * x) + j + 2];
+				canvas[(i + yPos) * width + j + xPos + 2] = texture[(i * x) + j + 2];
+
 			}
 
 		}
@@ -403,14 +431,19 @@ void Display()
 {
 	int i, j;
 
-	int x = 50;
-	int y = 30;
+	int x = canvas[0];
+	int y = canvas[1];
+
+	//printf("%d, %d", x, y);
+	//getchar();
+
+	CursorPosition(0, 0);
 
 	for(i = 0; i < y; ++i)
 	{
 		for (int j = 0; j < x; ++j)
 		{
-			ConsoleColor(0, canvas[i][j] / 10 % 10, 0, canvas[i][j] % 10);
+			ConsoleColor(0, canvas[(i * x) + j + 2] / 10 % 10, 0, canvas[(i * x) + j + 2] % 10);
 			printf("  ");
 
 		}

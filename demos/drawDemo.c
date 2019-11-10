@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "cmd.h"
+#include "../cmd.h"
 
 int WIDTH = 50;
 int HEIGHT = 30;
@@ -17,8 +17,8 @@ int main(void)
 
 	int *player;
 
-	Startup(WIDTH * 2, HEIGHT, "test");
-	Init(WIDTH, HEIGHT);
+	Startup((WIDTH) * 2, HEIGHT, "test");
+	Init(WIDTH, HEIGHT, 71);
 
 	x = 0;
 	y = 0;
@@ -26,11 +26,11 @@ int main(void)
 	while(1)
 	{
 
-		system("COLOR 0F");
-
 		ConsoleColor(7, 0, 1, 0);
 
 		player = LoadTexture("texture");
+
+		CleanCanvas(71);
 
 		Draw(player, x, y);
 
@@ -72,7 +72,7 @@ int main(void)
 			y--;
 		}
 
-		Sleep(100);
+		Sleep(10);
 
 	}
 
