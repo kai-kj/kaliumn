@@ -23,7 +23,8 @@ gcc [file-name].c -o [file-name] -lwinmm
 ## Usage example
 
 **Bouncing ball**
-<details>
+
+<details><summary>code</summary>
 main.c:
 
 ```c
