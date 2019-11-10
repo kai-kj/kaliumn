@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "../../cmd.h"
+#include "cmd.h"
 
 int **canvas;
 int **texture;
