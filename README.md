@@ -36,8 +36,11 @@ main.c:
 int main(void)
 {
     PlayAudio("sound.mp3", 0);
+    Sleep(1000);
     PauseAudio("sound.mp3");
+    Sleep(1000);
     ResumeAudio("sound.mp3");
+    Sleep(1000);
     StopAudio("sound.mp3");
 }
 
