@@ -4,9 +4,7 @@
 #include <time.h>
 #include "cmd.h"
 
-int **canvas;
-
-int WIDTH = 80;
+int WIDTH = 50;
 int HEIGHT = 30;
 
 int main(void)
@@ -20,6 +18,7 @@ int main(void)
 	int *player;
 
 	Startup(WIDTH * 2, HEIGHT, "test");
+	Init(WIDTH, HEIGHT);
 
 	x = 0;
 	y = 0;
@@ -34,6 +33,8 @@ int main(void)
 		player = LoadTexture("texture");
 
 		Draw(player, x, y);
+
+		Display();
 
 		if(x == 0)
 		{
