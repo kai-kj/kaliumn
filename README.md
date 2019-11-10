@@ -1,4 +1,4 @@
-# cmd.h
+# **cmd.h**
 
 A simple header file that makes it easier to develop Windows console applications with c.
 
@@ -26,8 +26,8 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ## Examples
 
-<details><summary>Play sound</summary>
-main.c:
+Play sound
+<details><summary>main.c</summary>
 
 ```c
 #include <stdlib.h>
@@ -47,9 +47,11 @@ int main(void)
 ```
 </details>
 
+Bouncing ball
 
-<details><summary>Bouncing ball</summary>
-main.c:
+![ball-gif](assets/ball.gif)
+
+<details><summary>main.c</summary>
 
 ```c
 #include <stdlib.h>
@@ -118,7 +120,7 @@ int main(void)
 }
 ```
 
-texture:
+<details><summary>texture</summary>
 
 ```c
 8, 8
