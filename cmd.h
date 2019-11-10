@@ -1,6 +1,6 @@
 /*
 cmd.h
-v0.20(2019-11-07)
+v0.21(2019-11-10)
 Please link the winmm.dll library(for mingw add "-lwinmm").
 
 Demos are included in the "demos" folder
@@ -17,7 +17,7 @@ int *canvas;
 /*
 SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
  Sets console text Color using SetConsoleTextAttribute(windows.h)
- ttps://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
+ https://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
 
  int foreground
   0: Black
@@ -300,7 +300,7 @@ void StopAudio(char path[100])
 /*
 *LoadTexture(char path[100])
  Loads texture to *int to be drawn by Draw()
- Textures can be drawn usig the TextureEditor Tool
+ Textures can be drawn using the TextureEditor Tool
  Texture format (* = space)
 
   height,*width
@@ -369,7 +369,7 @@ void InitCanvas(int width, int height, int color)
 	//The first element stores the width and the second the height
 	canvas[0] = width;
 	canvas[1] = height;
-	//Initialize with backgroud color
+	//Initialize with background color
 	for(i = 0; i < height; ++i)
 	{
 		for(j = 0; j < width; ++j)
@@ -392,7 +392,7 @@ void CleanCanvas(int color)
 	//Get width and height
 	int width = canvas[0];
 	int height = canvas[1];
-	//Clean with backgroud color
+	//Clean with background color
 	for(i = 0; i < height; ++i)
 	{
 		for(j = 0; j < width; ++j)
@@ -446,7 +446,7 @@ void Display()
 	//Get width and height
 	int x = canvas[0];
 	int y = canvas[1];
-	//Moves cursor to top left of the console to draw over previous frame (Using system("cls") makes the sccreen flicker)
+	//Moves cursor to top left of the console to draw over previous frame (Using system("cls") makes the screen flicker)
 	SetCursorPosition(0, 0);
 	//Draw
 	for(i = 0; i < y; ++i)
