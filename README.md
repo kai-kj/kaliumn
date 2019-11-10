@@ -120,7 +120,8 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 
 > }
 > ```
->
+> </details>
+>  
 > <details><summary>texture</summary>
 >
 > ```c
