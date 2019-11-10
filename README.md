@@ -25,7 +25,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 <details><summary>Play sound</summary>
 main.c:
 
-```
+```c
 #include <stdlib.h>
 #include <stdio.h>
 #include "cmd.h"
@@ -44,7 +44,7 @@ int main(void)
 <details><summary>Bouncing ball</summary>
 main.c:
 
-​```
+```
 #include <stdlib.h>
 #include <stdio.h>
 #include "cmd.h"
@@ -112,7 +112,8 @@ int main(void)
 ```
 
 texture:
-```
+
+```c
 8, 8
 99 99 41 41 41 41 99 99 
 99 41 41 41 41 41 41 99 
@@ -138,6 +139,10 @@ texture:
 k390983(https://github.com/k390983) - k2l8m8n1@gmail.com
 
  Distributed under the MIT license. See `LICENSE` for more information. 
+
+```
+
+```
 
 ```
 
