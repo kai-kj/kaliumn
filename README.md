@@ -138,12 +138,13 @@ gcc [file-name].c -o [file-name] -lwinmm
 > </details>
 
 ## Contributing
+Any contributions are **greatly appreciated**.
 
-1. Fork it (<https://github.com/k390983/cmd.h/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/cmd.h`)
+3. Commit your Changes (`git commit -m 'Add some cmd.h'`)
+4. Push to the Branch (`git push origin feature/cmd.h`)
+5. Open a Pull Request
 
 ----
 
