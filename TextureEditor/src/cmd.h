@@ -1,21 +1,13 @@
 /*
 cmd.h
 v0.20(2019-11-07)
-Please link the winmm.dll library(for mingw add "-lwinmm").
-
-Demos are included in the "demos" folder
-
-See "colors.png" for colors
-
-Use the Texture Editor included in the "TextureEditor" folder to make sprites
+Please include windows.h and link the winmm.dll library(for mingw add "-lwinmm").
 */
 
 #include <windows.h>
 
-int *canvas;
-
 /*
-SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
+ConsoleColor(int foreground, int background, int foreground_intensity, int background_intensity)
  Sets console text Color using SetConsoleTextAttribute(windows.h)
  ttps://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
 
@@ -51,7 +43,7 @@ SetColor(int foreground, int background, int foreground_intensity, int backgroun
   1: True
   default: False
 */
-void SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
+void ConsoleColor(int foreground, int background, int foreground_intensity, int background_intensity)
 {
 	//Check inputs
 	if(foreground < 0 || foreground > 7)
@@ -89,7 +81,7 @@ void CursorVisibility(int visibility)
 {
 	CONSOLE_CURSOR_INFO cursor;
 	//dwSize: "The percentage of the character cell that is filled by the cursor. This value is between 1 and 100."
-	//more info: https://docs.microsoft.com/en-us/windows/console/console-cursor-info-str
+	//more information on CONSOLE_CURSOR_INFO: https://docs.microsoft.com/en-us/windows/console/console-cursor-info-str
 	cursor.dwSize = 100;
 	if(visibility == 0)
 	{
@@ -99,13 +91,14 @@ void CursorVisibility(int visibility)
 	{
 		cursor.bVisible = TRUE;
 	}
+	//Set visibility
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 }
 
 /*
-SetCursorPosition(int x, int y)
- Changes cursor position using SetConsoleSetCursorPosition (windows.h)
- https://docs.microsoft.com/en-us/windows/console/setconsoleSetCursorPosition
+CursorPosition(int x, int y)
+ Changes cursor position using SetConsoleCursorPosition (windows.h)
+ https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition
 
  int x
   x coord (>= 0)
@@ -115,7 +108,7 @@ SetCursorPosition(int x, int y)
   y coord (>= 0)
   default: 0
 */
-void SetCursorPosition(int x, int y)
+void CursorPosition(int x, int y)
 {
 	//Check input
 	if(x < 0)
@@ -129,7 +122,8 @@ void SetCursorPosition(int x, int y)
 	COORD position;
     position.X = x;
     position.Y = y;
-    SetConsoleSetCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
+    //Set cursor position
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
 
 /*
@@ -174,18 +168,6 @@ void Startup(int width, int height, char title[100])
 	system("cls");
 }
 
-/*
-ScreenSize(int width, int height)
- Changes the screen size
-
- int width
-  window width (characters) (>= 0)
-  default: 0
-
- int height
-  window height (characters) (>= 0)
-  default: 0
-*/
 void ScreenSize(int width, int height)
 {
 	char screenSize[100];
@@ -199,19 +181,8 @@ void ScreenSize(int width, int height)
 		width = 0;
 	}
 	sprintf(screenSize, "MODE %d, %d", width, height);
+	//Set window size
 	system(screenSize);
-}
-
-/*
-ScreenTitle(char title[100])
- Changes the screen title
-
- char title
-  console title
-*/
-void ScreenTitle(char title[100])
-{
-	SetConsoleTitle(title);
 }
 
 /*
@@ -244,7 +215,7 @@ void PlayAudio(char path[100], int repeat)
 		sprintf(open, "open %s type MPEGVideo alias %s", path, path);
 		sprintf(play, "play %s", path);
 	}
-	//Close(sometimes sounds won't play the second time you want to play the same sound)
+	//Close(sometimes sounds won't play the second time you want to play it)
 	mciSendString(close, NULL, 0, 0);
 	//Open
 	mciSendString(open, NULL, 0, 0);
@@ -264,6 +235,7 @@ void PauseAudio(char path[100])
 {
 	char pause[100];
 	sprintf(pause, "pause %s", path);
+	//Pause
 	mciSendString(pause, NULL, 0, 0);
 }
 
@@ -279,6 +251,7 @@ void ResumeAudio(char path[100])
 {
 	char resume[100];
 	sprintf(resume, "resume %s", path);
+	//Resume
 	mciSendString(resume, NULL, 0, 0);
 }
 
@@ -294,29 +267,28 @@ void StopAudio(char path[100])
 {
 	char stop[100];
 	sprintf(stop, "stop %s", path);
+	//Stop
 	mciSendString(stop, NULL, 0, 0);
 }
 
 /*
 *LoadTexture(char path[100])
  Loads texture to *int to be drawn by Draw()
- Textures can be drawn usig the TextureEditor Tool
- Texture format (* = space)
+ Texture format
 
-  height,*width
-  [pixel 0, 0]*[pixel 1, 0]*[pixel 2, 0]* 
-  [pixel 0, 1]*[pixel 1, 1]*[pixel 2, 1]*  . . .
-  [pixel 0, 2]*[pixel 1, 2]*[pixel 2, 2]* 
+  height width
+  [pixel 0, 0] [pixel 1, 0] [pixel 2, 0]
+  [pixel 0, 1] [pixel 1, 1] [pixel 2, 1] . . .
+  [pixel 0, 2] [pixel 1, 2] [pixel 2, 2]
                    .
                    .
                    .
 
   height: height of texture
   width: width of texture
-  [pixel x, y]: color code of pixel(same code as SetColor())
+  [pixel x, y]: color code of pixel(same code as ConsoleColor())
    first digit: color
-   second digit: intensity
-  (99: transparent)
+   second digit: intensity (intensity 2 == trasparent)
 
  char path
   path to file
@@ -327,12 +299,12 @@ int *LoadTexture(char path[100])
 	int x, y;
 	FILE *fp = fopen(path,"r");
 	fscanf(fp, "%d, %d", &x, &y);
-	//Variable length array
+
 	int *texture = (int *)malloc((x * y + 2) * sizeof(int));
-	//The first element stores the width of the texture and the second element stores the height of the texture
+
 	texture[0] = x;
 	texture[1] = y;
-	//Load texture
+
 	for(i = 0; i < y; ++i)
 	{
 		for(j = 0; j < x; ++j)
@@ -344,121 +316,38 @@ int *LoadTexture(char path[100])
 			}
 		}
 	}
+
 	fclose(fp);
+
 	return texture;
 }
 
 /*
-InitCanvas(int width, int height, int color)
- Initializes canvas to be displayed to the console
-
- int width
-  width of canvas
-
- int height
-  height of canvas
-
- int color
-  background color for canvas
-*/
-void InitCanvas(int width, int height, int color)
-{
-	int i, j;
-	//Variable length array
-	canvas = (int *)malloc((width * height + 2) * sizeof(int));
-	//The first element stores the width and the second the height
-	canvas[0] = width;
-	canvas[1] = height;
-	//Initialize with backgroud color
-	for(i = 0; i < height; ++i)
-	{
-		for(j = 0; j < width; ++j)
-		{
-			canvas[(i * width) + j + 2] = color;
-		}
-	}
-}
-
-/*
-CleanCanvas(int color)
- Cleans canvas
-
- int color
-  background color for canvas
-*/
-void CleanCanvas(int color)
-{
-	int i, j;
-	//Get width and height
-	int width = canvas[0];
-	int height = canvas[1];
-	//Clean with backgroud color
-	for(i = 0; i < height; ++i)
-	{
-		for(j = 0; j < width; ++j)
-		{
-			canvas[(i * width) + j + 2] = color;
-		}
-	}
-}
-
-/*
-Draw(int *texture, int xPos, int yPos)
- Draws texture to canvas (use between ClearCanvas() and Display())
+Draw(int *texture)
+ Draws texture loaded by *LoadTexture()
 
  int *texture
-  texture to be drawn to canvas
-
- int xPos
-  x position(The top left corner is the origin)
-
- int yPos
-  x position(The top left corner is the origin)
+  texture
 */
-void Draw(int *texture, int xPos, int yPos)
+void Draw(int *texture)
 {
 	int i, j;
-	//Get width and height of texture
 	int x = texture[0];
 	int y = texture[1];
-	//Get width of canvas
-	int width = canvas[0];
-	//Draw
-	for(i = 0; i < y; ++i)
-	{
-		for (int j = 0; j < x; ++j)
-		{
-			if(texture[(i * x) + j + 2] != 99)
-			{
-				canvas[(i + yPos) * width + j + xPos + 2] = texture[(i * x) + j + 2];
-			}
-		}
-	}
-}
 
-/*
-Display()
- Displays canvas to console
-*/
-void Display()
-{
-	int i, j;
-	//Get width and height
-	int x = canvas[0];
-	int y = canvas[1];
-	//Moves cursor to top left of the console to draw over previous frame (Using system("cls") makes the sccreen flicker)
-	SetCursorPosition(0, 0);
-	//Draw
 	for(i = 0; i < y; ++i)
 	{
 		for (int j = 0; j < x; ++j)
 		{
-			SetColor(0, canvas[(i * x) + j + 2] / 10 % 10, 0, canvas[(i * x) + j + 2] % 10);
+			ConsoleColor(0, texture[(i * x) + j + 2] / 10 % 10, 0, texture[(i * x) + j + 2] % 10);
 			printf("  ");
 		}
+
 		if(i < y - 1)
 		{
 			printf("\n");
 		}
+
 	}
+
 }

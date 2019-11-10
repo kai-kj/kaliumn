@@ -18,7 +18,7 @@ int main(void)
 	int *player;
 
 	Startup((WIDTH) * 2, HEIGHT, "test");
-	Init(WIDTH, HEIGHT, 71);
+	InitCanvas(WIDTH, HEIGHT, 71);
 
 	x = 0;
 	y = 0;
