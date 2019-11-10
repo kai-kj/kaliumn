@@ -129,7 +129,7 @@ void SetCursorPosition(int x, int y)
 	COORD position;
     position.X = x;
     position.Y = y;
-    SetConsoleSetCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
 
 /*

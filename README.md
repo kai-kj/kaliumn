@@ -1,150 +1,123 @@
-----
-
 # cmd.h
 
-----
+A simple header file that makes it easier to develop Windows console applications with c.
 
-v0.13(2019-11-01)
+You can easily change console window properties, play sounds, and display images.
 
-> ※Please include windows.h and link the winmm.dll library (for MinGW add `-lwinmm`).
+## Compiling
 
-##### Table Of Contents
+Include cmd.h with your project and link winmm when compiling.
 
-* [ConsoleColour()](#consolecolour-int-foreground-int-background-int-foreground_intensity-int-background_intensity)
-* [CursorVisibility()](#cursorvisibility-int-visibility)
-* [CursorPosition()](#cursorposition-int-x-int-y)
-* [Startup()](#start-upintwidth-int-height-char-title100)
-* [PlayAudio()](#playaudio-char-path100-int-repeat)
-* [PauseAudio()](#pauseaudio-char-path100)
-* [ResumeAudio()](#resumeaudio-char-path100)
-* [StopAudio()](##stopaudio-char-path100)
+At the top of your c file:
 
-----
+```c
+#include "cmd.h"
+```
 
-### ConsoleColour (int foreground, int background, int foreground_intensity, int background_intensity)
+When compiling (MinGW):
 
-Sets console text colour using [SetConsoleTextAttribute()](https://docs.microsoft.com/en-us/windows/console/setconsoletextattribute) from [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
+```
+gcc [file-name].c -o [file-name] -lwinmm
+```
 
-![cmd_colours](cmd_colours.png)
+## Usage example
 
-| *int* foreground (default: White) |
-| ---------------- |
-| 0: Black         |
-| 1: Blue          |
-| 2: Green         |
-| 3: Cyan          |
-| 4: Red           |
-| 5: Magenta       |
-| 6: Yellow        |
-| 7: White         |
+**Bouncing ball**
+<details>
+main.c:
 
-| *int* background (default: White) |
-| ---------------- |
-| 0: Black         |
-| 1: Blue          |
-| 2: Green         |
-| 3: Cyan          |
-| 4: Red           |
-| 5: Magenta       |
-| 6: Yellow        |
-| 7: White         |
+```c
 
-| *int* foreground_intensity (default: False) |
-| -------------------------- |
-| 0: False                   |
-| 1: True                    |
+#include <stdlib.h>
+#include <stdio.h>
+#include "cmd.h"
 
-| *int* background_intensity (default: False) |
-| -------------------------- |
-| 0: False                   |
-| 1: True                    |
+int main(void)
+{
+	int x = 0;
+    int y = 0;
+	int WIDTH = 50;
+	int HEIGHT = 30;
+	int xDirection = 0;
+	int yDirection = 0;
+	int *player = LoadTexture("texture");;
 
+	Startup((WIDTH) * 2, HEIGHT, "test");
+	InitCanvas(WIDTH, HEIGHT, 71);
 
+	while(1)
+	{
+        //Collisions
+		if(x == 0)
+		{
+			xDirection = 0;
+		}
+		if(x + player[0] == WIDTH)
+		{
+			xDirection = 1;
+		}
+		if(y == 0)
+		{
+			yDirection = 0;
+		}
+		if(y + player[1] == HEIGHT)
+		{
+			yDirection = 1;
+		}
 
-----
+		//Movement
+		if(xDirection == 0)
+		{
+			x++;
+		}
+		else
+		{
+			x--;
+		}
+		if(yDirection == 0)
+		{
+			y++;
+		}
+		else
+		{
+			y--;
+		}
 
-### CursorVisibility (int visibility)
+		CleanCanvas(71);
+		Draw(player, x, y);
+		Display();
 
-Changes console cursor visibility using [SetConsoleCursorInfo()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo) from [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
+		Sleep(10);
 
-| *int* visibility (default: Visible) |
-| -------------------------- |
-| 0: invisible                |
-| 1: visible          |
+	}
 
-----
+}
+```
 
-### CursorPosition (int x, int y)
+texture:
 
-Changes cursor position using [SetConsoleCursorPosition()](https://docs.microsoft.com/en-us/windows/console/setconsolecursorposition) [windows.h](https://docs.microsoft.com/en-gb/windows/console/)
+```
+8, 8
+99 99 41 41 41 41 99 99 
+99 41 41 41 41 41 41 99 
+41 41 41 41 41 41 41 41 
+41 41 41 41 41 41 41 40 
+41 41 41 41 41 41 40 40 
+40 40 41 41 40 40 40 40 
+99 40 40 40 40 40 40 99 
+99 99 40 40 40 40 99 99 
+```
+</details>
+## Contributing
 
-| *int* x (default: 0)       |
-| -------------- |
-| x coord (>= 0) |
-
-| *int* y (default: 0)      |
-| -------------- |
-| y coord (>= 0) |
-
-----
-
-### Startup (int width, int height, char title[100])
-
-Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
-
-| *int* height (default: 0)      |
-| -------------- |
-| window height (>= 0) |
-
-| *int* width (default: 0)      |
-| -------------- |
-| window width (>= 0) |
-
-| *char* title  |
-| ------------- |
-| console title |
-
-----
-
-### PlayAudio (char path[100], int repeat)
-
-Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to play sounds.
-
-| *char* path             |
-| ----------------------- |
-| path to audio file(mp3) |
-
-| *int* repeat (default: 0) |
-| ------------ |
-| 0: false     |
-| 1: true      |
-
-----
-
-### PauseAudio (char path[100])
-
-Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to pause sounds.
-
-| *char* path             |
-| ----------------------- |
-| path to audio file(mp3) |
+1. Fork it (<https://github.com/k390983/cmd.h/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
 
 ----
 
-### ResumeAudio (char path[100])
+k390983(https://github.com/k390983) - k2l8m8n1@gmail.com
 
-Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to resume paused sounds.
-
-| *char* path             |
-| ----------------------- |
-| path to audio file(mp3) |
-
-----
-
-### StopAudio (char path[100])
-
-Uses [mciSendString()](https://docs.microsoft.com/en-us/previousversions/dd757161(v%3Dvs.85)) to stop paused sounds.
-
-| *char* path             |
-| ----------------------- |
-| path to audio file(mp3) |
+ Distributed under the MIT license. See `LICENSE` for more information. 

@@ -1,21 +1,18 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #include "../cmd.h"
-
-int WIDTH = 50;
-int HEIGHT = 30;
 
 int main(void)
 {
 
 	int x, y;
-	int i, j;
-	int xMode = 0;
-	int yMode = 0;
+	int WIDTH = 50;
+	int HEIGHT = 30;
+	int xDirection = 0;
+	int yDirection = 0;
 
-	int *player;
+	int *player = LoadTexture("texture");;
 
 	Startup((WIDTH) * 2, HEIGHT, "test");
 	InitCanvas(WIDTH, HEIGHT, 71);
@@ -26,35 +23,27 @@ int main(void)
 	while(1)
 	{
 
-		ConsoleColor(7, 0, 1, 0);
-
-		player = LoadTexture("texture");
-
-		CleanCanvas(71);
-
-		Draw(player, x, y);
-
-		Display();
+		SetColor(7, 0, 1, 0);
 
 		if(x == 0)
 		{
-			xMode = 0;
+			xDirection = 0;
 		}
 		if(x + player[0] == WIDTH)
 		{
-			xMode = 1;
+			xDirection = 1;
 		}
 		if(y == 0)
 		{
-			yMode = 0;
+			yDirection = 0;
 		}
 		if(y + player[1] == HEIGHT)
 		{
-			yMode = 1;
+			yDirection = 1;
 		}
 
 		
-		if(xMode == 0)
+		if(xDirection == 0)
 		{
 			x++;
 		}
@@ -63,7 +52,7 @@ int main(void)
 			x--;
 		}
 
-		if(yMode == 0)
+		if(yDirection == 0)
 		{
 			y++;
 		}
@@ -71,6 +60,12 @@ int main(void)
 		{
 			y--;
 		}
+
+		CleanCanvas(71);
+
+		Draw(player, x, y);
+
+		Display();
 
 		Sleep(10);
 
