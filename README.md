@@ -20,7 +20,11 @@ When compiling (MinGW):
 gcc [file-name].c -o [file-name] -lwinmm
 ```
 
-## Usage example
+## Usage 
+
+ *Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).* 
+
+## Examples
 
 <details><summary>Play sound</summary>
 main.c:
@@ -137,13 +141,4 @@ texture:
 ----
 
 k390983(https://github.com/k390983) - k2l8m8n1@gmail.com
-
- Distributed under the MIT license. See `LICENSE` for more information. 
-
-```
-
-```
-
-```
-
-```
+Distributed under the MIT license. See `LICENSE` for more information. 
