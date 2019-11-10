@@ -26,7 +26,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ## Examples
 
-> #### Play sound
+> ### Play sound
 >
 > <details><summary>main.c</summary>
 >
@@ -48,7 +48,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > ```
 > </details>
 
-> **Bouncing ball**
+> ### Bouncing ball
 >
 > ![ball-gif](assets/ball.gif)
 >
