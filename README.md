@@ -151,5 +151,5 @@ Any contributions are **greatly appreciated**.
 
 ----
 
-k390983(https://github.com/k390983) - k2l8m8n1@gmail.com
+k390983(https://github.com/k390983) - k2l8m8n1@gmail.com    
 Distributed under the MIT license. See `LICENSE` for more information. 
