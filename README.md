@@ -22,11 +22,27 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ## Usage example
 
+<details><summary>Play sound</summary>
+main.c:
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include "cmd.h"
+
+int main(void)
+{
+    PlayAudio("sound.mp3", 0);
+    PauseAudio("sound.mp3");
+    ResumeAudio("sound.mp3");
+    StopAudio("sound.mp3");
+}
+```
+</details>
+
+
 <details><summary>Bouncing ball</summary>
 main.c:
-
 ```c
-
 #include <stdlib.h>
 #include <stdio.h>
 #include "cmd.h"
@@ -43,10 +59,10 @@ int main(void)
 
 	Startup((WIDTH) * 2, HEIGHT, "test");
 	InitCanvas(WIDTH, HEIGHT, 71);
-
+	
 	while(1)
 	{
-        //Collisions
+	    //Collisions
 		if(x == 0)
 		{
 			xDirection = 0;
@@ -63,7 +79,7 @@ int main(void)
 		{
 			yDirection = 1;
 		}
-
+	
 		//Movement
 		if(xDirection == 0)
 		{
@@ -81,20 +97,19 @@ int main(void)
 		{
 			y--;
 		}
-
+	
 		CleanCanvas(71);
 		Draw(player, x, y);
 		Display();
-
+	
 		Sleep(10);
-
+	
 	}
 
 }
 ```
 
 texture:
-
 ```
 8, 8
 99 99 41 41 41 41 99 99 
@@ -121,3 +136,4 @@ texture:
 k390983(https://github.com/k390983) - k2l8m8n1@gmail.com
 
  Distributed under the MIT license. See `LICENSE` for more information. 
+```
