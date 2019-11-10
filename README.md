@@ -26,114 +26,115 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ## Examples
 
-Play sound
-<details><summary>main.c</summary>
+> **Play sound**
+>
+> <details><summary>main.c</summary>
+>
+> ```c
+> #include <stdlib.h>
+> #include <stdio.h>
+> #include "cmd.h"
+> int main(void)
+> {
+>     PlayAudio("sound.mp3", 0);
+>     Sleep(1000);
+>     PauseAudio("sound.mp3");
+>     Sleep(1000);
+>     ResumeAudio("sound.mp3");
+>     Sleep(1000);
+>     StopAudio("sound.mp3");
+> }
+> 
+> ```
+> </details>
 
-```c
-#include <stdlib.h>
-#include <stdio.h>
-#include "cmd.h"
-int main(void)
-{
-    PlayAudio("sound.mp3", 0);
-    Sleep(1000);
-    PauseAudio("sound.mp3");
-    Sleep(1000);
-    ResumeAudio("sound.mp3");
-    Sleep(1000);
-    StopAudio("sound.mp3");
-}
-
-```
-</details>
-
-Bouncing ball
-
-![ball-gif](assets/ball.gif)
-
-<details><summary>main.c</summary>
-
-```c
-#include <stdlib.h>
-#include <stdio.h>
-#include "cmd.h"
-
-int main(void)
-{
-	int x = 0;
-    int y = 0;
-	int WIDTH = 50;
-	int HEIGHT = 30;
-	int xDirection = 0;
-	int yDirection = 0;
-	int *player = LoadTexture("texture");;
-
-	Startup((WIDTH) * 2, HEIGHT, "test");
-	InitCanvas(WIDTH, HEIGHT, 71);
-	
-	while(1)
-	{
-	    //Collisions
-		if(x == 0)
-		{
-			xDirection = 0;
-		}
-		if(x + player[0] == WIDTH)
-		{
-			xDirection = 1;
-		}
-		if(y == 0)
-		{
-			yDirection = 0;
-		}
-		if(y + player[1] == HEIGHT)
-		{
-			yDirection = 1;
-		}
-	
-		//Movement
-		if(xDirection == 0)
-		{
-			x++;
-		}
-		else
-		{
-			x--;
-		}
-		if(yDirection == 0)
-		{
-			y++;
-		}
-		else
-		{
-			y--;
-		}
-	
-		CleanCanvas(71);
-		Draw(player, x, y);
-		Display();
-	
-		Sleep(10);
-	
-	}
-
-}
-```
-
-<details><summary>texture</summary>
-
-```c
-8, 8
-99 99 41 41 41 41 99 99 
-99 41 41 41 41 41 41 99 
-41 41 41 41 41 41 41 41 
-41 41 41 41 41 41 41 40 
-41 41 41 41 41 41 40 40 
-40 40 41 41 40 40 40 40 
-99 40 40 40 40 40 40 99 
-99 99 40 40 40 40 99 99 
-```
-</details>
+> * **Bouncing ball**
+>
+> ![ball-gif](assets/ball.gif)
+>
+> <details><summary>main.c</summary>
+>
+> ```c
+> #include <stdlib.h>
+> #include <stdio.h>
+> #include "cmd.h"
+> 
+> int main(void)
+> {
+> 	int x = 0;
+>     int y = 0;
+> 	int WIDTH = 50;
+> 	int HEIGHT = 30;
+> 	int xDirection = 0;
+> 	int yDirection = 0;
+> 	int *player = LoadTexture("texture");;
+> 
+> 	Startup((WIDTH) * 2, HEIGHT, "test");
+> 	InitCanvas(WIDTH, HEIGHT, 71);
+> 	
+> 	while(1)
+> 	{
+> 	    //Collisions
+> 		if(x == 0)
+> 		{
+> 			xDirection = 0;
+> 		}
+> 		if(x + player[0] == WIDTH)
+> 		{
+> 			xDirection = 1;
+> 		}
+> 		if(y == 0)
+> 		{
+> 			yDirection = 0;
+> 		}
+> 		if(y + player[1] == HEIGHT)
+> 		{
+> 			yDirection = 1;
+> 		}
+> 	
+> 		//Movement
+> 		if(xDirection == 0)
+> 		{
+> 			x++;
+> 		}
+> 		else
+> 		{
+> 			x--;
+> 		}
+> 		if(yDirection == 0)
+> 		{
+> 			y++;
+> 		}
+> 		else
+> 		{
+> 			y--;
+> 		}
+> 	
+> 		CleanCanvas(71);
+> 		Draw(player, x, y);
+> 		Display();
+> 	
+> 		Sleep(10);
+> 	
+> 	}
+> 
+> }
+> ```
+>
+> <details><summary>texture</summary>
+>
+> ```c
+> 8, 8
+> 99 99 41 41 41 41 99 99 
+> 99 41 41 41 41 41 41 99 
+> 41 41 41 41 41 41 41 41 
+> 41 41 41 41 41 41 41 40 
+> 41 41 41 41 41 41 40 40 
+> 40 40 41 41 40 40 40 40 
+> 99 40 40 40 40 40 40 99 
+> 99 99 40 40 40 40 99 99 
+> ```
+> </details>
 
 ## Contributing
 
