@@ -11,6 +11,7 @@ int main(void)
 	int HEIGHT = 30;
 	int xDirection = 0;
 	int yDirection = 0;
+	char fpsChar[100];
 
 	int *player = LoadTexture("texture");;
 
@@ -63,11 +64,15 @@ int main(void)
 
 		CleanCanvas(71);
 
-		Draw(player, x, y);
+		DrawTexture(player, x, y);
+
+		sprintf(fpsChar, "fps: %f", GetFPS());
+
+		DrawChar(fpsChar, 40, 0, 0);
 
 		Display();
 
-		Sleep(10);
+		//Sleep(10);
 
 	}
 

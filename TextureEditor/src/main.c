@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "cmd.h"
+#include "../../cmd.h"
 
-int **canvas;
+int **screen;
 int **texture;
 int height = 0;
 int width = 0;
@@ -30,15 +30,13 @@ int newFile()
 
 	system("cls");
 
-	ConsoleColor(0, 7, 0, 1);
+	SetColor(0, 7, 0, 1);
 
-	printf("Press ENTER To Continue...");
-
-	getchar();
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 
 	while(height == 0 || width == 0)
 	{
-		ConsoleColor(0, 7, 0, 1);
+		SetColor(0, 7, 0, 1);
 		system("cls");
 		printf("Enter Texture Width: ");
 		scanf("%d", &width);
@@ -89,15 +87,13 @@ int openFile()
 
 	system("cls");
 
-	ConsoleColor(0, 7, 0, 1);
+	SetColor(0, 7, 0, 1);
 
-	printf("Press ENTER To Continue...");
-
-	getchar();
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 
 	while(clear == 0)
 	{
-		ConsoleColor(0, 7, 0, 1);
+		SetColor(0, 7, 0, 1);
 		system("cls");
 		printf("File Name: ");
 		scanf("%s", &fileName);
@@ -158,6 +154,8 @@ int main(void)
 
 	int brushSize = 0;
 
+	POINT cursorPos;
+
 	screenWidth = 30;
 	screenHeight = 20;
 
@@ -186,6 +184,22 @@ int main(void)
 		currentTime = timeFromStart();
 
 		//cursor
+		//mouse
+
+		/*if(GetCursorPos(&cursorPos) != 0)
+		{
+			if(cursorPos.x < width && cursorPos.x > 0)
+			{
+				cursor_x = cursorPos.x / 2;
+			}
+			if(cursor_y < height && cursor_y > 0)
+			{
+				cursor_y = cursorPos.y;
+			}
+			
+		}*/
+
+		//keyboard
 
 		if((GetKeyState(VK_RIGHT) & 0x8000) && cursor_x < width - 1 && currentTime - inputTimeR > INPUTSPEED)
 		{
@@ -223,11 +237,11 @@ int main(void)
 			inputL = 0;
 		}
 
-		if((GetKeyState(VK_DOWN) & 0x8000) && cursor_y < width - 1 && currentTime - inputTimeU > INPUTSPEED)
+		if((GetKeyState(VK_DOWN) & 0x8000) && cursor_y < height - 1 && currentTime - inputTimeU > INPUTSPEED)
 		{
 			cursor_y++;
 		}
-		else if((GetKeyState(VK_DOWN) & 0x8000) && cursor_y < width - 1)
+		else if((GetKeyState(VK_DOWN) & 0x8000) && cursor_y < height - 1)
 		{
 			if(inputU == 0)
 			{
@@ -382,19 +396,16 @@ int main(void)
 
 			fprintf(fp, "%d, %d\n", width, height);
 
-			for(i = 0; i < height; ++i)
+			/*for(i = 0; i < height; ++i)
 			{
 				for(j = 0; j < width; ++j)
 				{
 					fprintf(fp, "%02d ", texture[i][j]);
 				}
 
-				if(i < height - 1)
-				{
-					fprintf(fp, "\n");
-				}
+				fprintf(fp, "\n");
 
-			}
+			}*/
 
 			fclose(fp);
 
@@ -416,20 +427,20 @@ int main(void)
 
 		//draw
 
-		CursorPosition(0, 0);
+		SetCursorPosition(0, 0);
 
 		if(color == 99)
 		{
 			for(i = 0; i < screenWidth; ++i)
 			{
-				ConsoleColor(1, 7, 1, 1);
+				SetColor(1, 7, 1, 1);
 				printf("*");
 			}
 			
 		}
 		else
 		{
-			ConsoleColor(0, color / 10 % 10, 0, color % 10);
+			SetColor(0, color / 10 % 10, 0, color % 10);
 			for(i = 0; i < screenWidth; ++i)
 			{
 				printf(" ");
@@ -440,7 +451,7 @@ int main(void)
 
 		for(i = 0; i < width + 1; ++i)
 		{
-			ConsoleColor(0, 7, 0, 1);
+			SetColor(0, 7, 0, 1);
 			printf("##");
 		}
 
@@ -449,7 +460,7 @@ int main(void)
 		for(i = 0; i < height; ++i)
 		{
 
-			ConsoleColor(0, 7, 0, 1);
+			SetColor(0, 7, 0, 1);
 			printf("#");
 
 			for(j = 0; j < width; ++j)
@@ -460,13 +471,13 @@ int main(void)
 					{
 						if(texture[i][j] / 10 % 10 == 0)
 						{
-							ConsoleColor(7, 7, 1, 1);
+							SetColor(7, 7, 1, 1);
 							printf("  ");
 
 						}
 						else
 						{
-							ConsoleColor(0, 0, 0, 0);
+							SetColor(0, 0, 0, 0);
 							printf("  ");
 
 						}
@@ -481,12 +492,12 @@ int main(void)
 					{
 						if(texture[i][j] == 99)
 						{
-							ConsoleColor(1, 7, 1, 1);
+							SetColor(1, 7, 1, 1);
 							printf("* ");
 						}
 						else
 						{
-						ConsoleColor(0, texture[i][j] / 10 % 10, 0, texture[i][j] % 10);
+						SetColor(0, texture[i][j] / 10 % 10, 0, texture[i][j] % 10);
 						printf("  ");
 						}
 					}
@@ -496,68 +507,69 @@ int main(void)
 				{
 					if(texture[i][j] == 99)
 					{
-						ConsoleColor(1, 7, 1, 1);
+						SetColor(1, 7, 1, 1);
 						printf("* ");
 					}
 					else
 					{
-					ConsoleColor(0, texture[i][j] / 10 % 10, 0, texture[i][j] % 10);
+					SetColor(0, texture[i][j] / 10 % 10, 0, texture[i][j] % 10);
 					printf("  ");
+					//printf("%02d", i);
 					}
 					
 				}
 
 			}
 
-			ConsoleColor(0, 7, 0, 1);
+			SetColor(0, 7, 0, 1);
 			printf("#\n");
 
 		}
 
 		for(i = 0; i < width + 1; ++i)
 		{
-			ConsoleColor(0, 7, 0, 1);
+			SetColor(0, 7, 0, 1);
 			printf("##");
 		}
 
 		printf("\n");
 
-		ConsoleColor(0, 1, 0, 0);
+		SetColor(0, 1, 0, 0);
 		printf(" 1 ");
-		ConsoleColor(0, 2, 0, 0);
+		SetColor(0, 2, 0, 0);
 		printf(" 2 ");
-		ConsoleColor(0, 3, 0, 0);
+		SetColor(0, 3, 0, 0);
 		printf(" 3 ");
-		ConsoleColor(0, 4, 0, 0);
+		SetColor(0, 4, 0, 0);
 		printf(" 4 ");
-		ConsoleColor(0, 5, 0, 0);
+		SetColor(0, 5, 0, 0);
 		printf(" 5 ");
-		ConsoleColor(0, 6, 0, 0);
+		SetColor(0, 6, 0, 0);
 		printf(" 6 ");
-		ConsoleColor(0, 7, 0, 0);
+		SetColor(0, 7, 0, 0);
 		printf(" 7 ");
-		ConsoleColor(1, 7, 1, 1);
+		SetColor(1, 7, 1, 1);
 		printf(" 9 ");
-		ConsoleColor(7, 0, 1, 0);
+		SetColor(7, 0, 1, 0);
 		printf(" 0 \n");
 
-		ConsoleColor(0, 1, 0, 1);
+		SetColor(0, 1, 0, 1);
 		printf("   ");
-		ConsoleColor(0, 2, 0, 1);
+		SetColor(0, 2, 0, 1);
 		printf("   ");
-		ConsoleColor(0, 3, 0, 1);
+		SetColor(0, 3, 0, 1);
 		printf("   ");
-		ConsoleColor(0, 4, 0, 1);
+		SetColor(0, 4, 0, 1);
 		printf("   ");
-		ConsoleColor(0, 5, 0, 1);
+		SetColor(0, 5, 0, 1);
 		printf("   ");
-		ConsoleColor(0, 6, 0, 1);
+		SetColor(0, 6, 0, 1);
 		printf("   ");
-		ConsoleColor(0, 7, 0, 1);
+		SetColor(0, 7, 0, 1);
 		printf("   ");
-		ConsoleColor(1, 7, 1, 1);
+		SetColor(1, 7, 1, 1);
 		printf(" * ");
-		ConsoleColor(0, 0, 0, 1);
+		SetColor(0, 0, 0, 1);
 		printf("   ");
 
 	}

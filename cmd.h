@@ -11,8 +11,19 @@ Use the Texture Editor included in the "TextureEditor" folder to make sprites
 */
 
 #include <windows.h>
+#include <time.h>
 
 int *canvas;
+char *text;
+int *textColor;
+float lastDraw = 0;
+float fps;
+
+float timeFromStart()
+{
+	clock_t time = clock();
+	return (double)time / CLOCKS_PER_SEC;
+}
 
 /*
 SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
@@ -170,6 +181,8 @@ void Startup(int width, int height, char title[100])
 	system("chcp 65001");
 	//Set console title
 	SetConsoleTitle(title);
+	//Disable quick edit
+	SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), ENABLE_EXTENDED_FLAGS);
 	//Clear screen
 	system("cls");
 }
@@ -366,6 +379,8 @@ void InitCanvas(int width, int height, int color)
 	int i, j;
 	//Variable length array
 	canvas = (int *)malloc((width * height + 2) * sizeof(int));
+	text = (char *)malloc((width * height + 1) * sizeof(char));
+	textColor = (int *)malloc((width * height) * sizeof(int));
 	//The first element stores the width and the second the height
 	canvas[0] = width;
 	canvas[1] = height;
@@ -375,8 +390,11 @@ void InitCanvas(int width, int height, int color)
 		for(j = 0; j < width; ++j)
 		{
 			canvas[(i * width) + j + 2] = color;
+			text[(i * width) + j] = '\0';
+			textColor[(i * width) + j] = 00;
 		}
 	}
+	text[width * height + 1] = '\0';
 }
 
 /*
@@ -403,7 +421,7 @@ void CleanCanvas(int color)
 }
 
 /*
-Draw(int *texture, int xPos, int yPos)
+DrawTexture(int *texture, int xPos, int yPos)
  Draws texture to canvas (use between ClearCanvas() and Display())
 
  int *texture
@@ -415,7 +433,7 @@ Draw(int *texture, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void Draw(int *texture, int xPos, int yPos)
+void DrawTexture(int *texture, int xPos, int yPos)
 {
 	int i, j;
 	//Get width and height of texture
@@ -437,12 +455,67 @@ void Draw(int *texture, int xPos, int yPos)
 }
 
 /*
+DrawPixel(int color, int xPos, int yPos)
+ Draws pixel to canvas (use between ClearCanvas() and Display())
+
+ int color
+  color of pixel
+
+ int xPos
+  x position(The top left corner is the origin)
+
+ int yPos
+  x position(The top left corner is the origin)
+*/
+void DrawPixel(int color, int xPos, int yPos)
+{
+	//Get width of canvas
+	int width = canvas[0];
+	//Draw
+	canvas[yPos * width + xPos + 2] = color;
+}
+
+/*
+DrawChar(char input[], int color, int xPos, int yPos)
+ Draws text to canvas (use between ClearCanvas() and Display())
+
+ char input[]
+  text to be drawn to canvas
+
+ int color
+  color of text
+
+ int xPos
+  x position(The top left corner is the origin)
+
+ int yPos
+  x position(The top left corner is the origin)
+*/
+void DrawChar(char input[], int color, int xPos, int yPos)
+{
+	int i = 0;
+	//Get width of canvas
+	int width = canvas[0];
+	//Draw
+	while(input[i] != '\0')
+	{
+		text[yPos * width + i + xPos] = input[i];
+		textColor[yPos * width + i + xPos] = color;
+		i++;
+	}
+}
+
+/*
 Display()
  Displays canvas to console
 */
 void Display()
 {
 	int i, j;
+	//Log fps
+	float currentTime = timeFromStart();
+	fps = 1 / (currentTime - lastDraw);
+	lastDraw = timeFromStart();
 	//Get width and height
 	int x = canvas[0];
 	int y = canvas[1];
@@ -453,12 +526,29 @@ void Display()
 	{
 		for (int j = 0; j < x; ++j)
 		{
-			SetColor(0, canvas[(i * x) + j + 2] / 10 % 10, 0, canvas[(i * x) + j + 2] % 10);
-			printf("  ");
+			if(text[(i * x) + j] != '\0')
+			{
+				SetColor(textColor[(i * x) + j] / 10 % 10, canvas[(i * x) + j + 2] / 10 % 10, textColor[(i * x) + j] % 10, canvas[(i * x) + j + 2] % 10);
+				printf("%c ", text[(i * x) + j]);
+			}
+			else
+			{
+				SetColor(0, canvas[(i * x) + j + 2] / 10 % 10, 0, canvas[(i * x) + j + 2] % 10);
+				printf("  ");
+			}
 		}
 		if(i < y - 1)
 		{
 			printf("\n");
 		}
 	}
+}
+
+/*
+GetFPS()
+ Returns fps
+*/
+float GetFPS()
+{
+	return fps;
 }
