@@ -6,7 +6,7 @@ You can easily change console window properties, play sounds, and display images
 
 ## Compiling
 
-Include cmd.h with your project and link winmm when compiling.
+Include cmd.h with your project and link *winmm* when compiling.
 
 At the top of your c file:
 
@@ -22,7 +22,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ## Usage 
 
- *Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).* 
+*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).* 
 
 ## Examples
 
@@ -138,7 +138,8 @@ gcc [file-name].c -o [file-name] -lwinmm
 > </details>
 
 ## Texture Editor
-The Texture Editor can bu used to easily make textures that can be used by Draw().
+The Texture Editor can bu used to easily make textures that can be used by Draw().    
+*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki) for more imformation.* 
 
 ## Contributing
 Any contributions are **greatly appreciated**.
