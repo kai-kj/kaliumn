@@ -26,43 +26,20 @@ float timeFromStart()
 }
 
 /*
-SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
+SetColor(int foreground, int backgrounds)
  Sets console text Color using SetConsoleTextAttribute(windows.h)
  https://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
 
  int foreground
-  0: Black
-  1: Blue
-  2: Green
-  3: Cyan
-  4: Red
-  5: Magenta
-  6: Yellow
-  7: White
-  default: White
+  see Colors.png
+  default: 71;
 
  int background
-  0: Black
-  1: Blue
-  2: Green
-  3: Cyan
-  4: Red
-  5: Magenta
-  6: Yellow
-  7: White 
-  default: Black
+  see Colors.png
+  default: 00
 
- int foreground_intensity
-  0: False
-  1: True
-  default: False
-
- int background_intensity
-  0: False
-  1: True
-  default: False
 */
-void SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
+/*void SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
 {
 	//Check inputs
 	if(foreground < 0 || foreground > 7)
@@ -83,6 +60,33 @@ void SetColor(int foreground, int background, int foreground_intensity, int back
 	}
 	//Set Colors
 	int Color = 16 * background + 128 * background_intensity + foreground + 8 * foreground_intensity;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Color);
+}*/
+void SetColor(int foreground, int background)
+{
+	int f = foreground / 10 % 10;
+	int fi = foreground % 10;
+	int b = background / 10 % 10;
+	int bi = background % 10;
+	//Check inputs
+	if(f < 0 || f > 7)
+	{
+		f = 7;
+	}
+	if(b < 0 || b > 7)
+	{
+		b = 0;
+	}
+	if(fi < 0 || fi > 1)
+	{
+		fi = 0;
+	}
+	if(bi < 0 || bi > 1)
+	{
+		bi = 0;
+	}
+	//Set Colors
+	int Color = 16 * b + 128 * bi + f + 8 * fi;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Color);
 }
 
@@ -528,12 +532,12 @@ void Display()
 		{
 			if(text[(i * x) + j] != '\0')
 			{
-				SetColor(textColor[(i * x) + j] / 10 % 10, canvas[(i * x) + j + 2] / 10 % 10, textColor[(i * x) + j] % 10, canvas[(i * x) + j + 2] % 10);
+				SetColor(textColor[(i * x) + j], canvas[(i * x) + j + 2]);
 				printf("%c ", text[(i * x) + j]);
 			}
 			else
 			{
-				SetColor(0, canvas[(i * x) + j + 2] / 10 % 10, 0, canvas[(i * x) + j + 2] % 10);
+				SetColor(0, canvas[(i * x) + j + 2]);
 				printf("  ");
 			}
 		}

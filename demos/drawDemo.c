@@ -24,7 +24,7 @@ int main(void)
 	while(1)
 	{
 
-		SetColor(7, 0, 1, 0);
+		SetColor(71, 0);
 
 		if(x == 0)
 		{
