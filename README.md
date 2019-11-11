@@ -138,7 +138,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > </details>
 
 ## Texture Editor
-The Texture Editor can bu used to easily make textures that can be used by Draw().
+The Texture Editor can bu used to easily make textures that can be used by Draw().    
 *Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki) for more imformation.* 
 
 ## Contributing
