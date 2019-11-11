@@ -6,7 +6,7 @@ You can easily change console window properties, play sounds, and display images
 
 ## Compiling
 
-Include cmd.h with your project and link winmm when compiling.
+Include cmd.h with your project and link *winmm* when compiling.
 
 At the top of your c file:
 
