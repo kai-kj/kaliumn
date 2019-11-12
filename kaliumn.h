@@ -39,29 +39,6 @@ SetColor(int foreground, int backgrounds)
   default: 00
 
 */
-/*void SetColor(int foreground, int background, int foreground_intensity, int background_intensity)
-{
-	//Check inputs
-	if(foreground < 0 || foreground > 7)
-	{
-		foreground = 7;
-	}
-	if(background < 0 || background > 7)
-	{
-		background = 0;
-	}
-	if(foreground_intensity < 0 || foreground_intensity > 1)
-	{
-		foreground_intensity = 0;
-	}
-	if(background_intensity < 0 || background_intensity > 1)
-	{
-		background_intensity = 0;
-	}
-	//Set Colors
-	int Color = 16 * background + 128 * background_intensity + foreground + 8 * foreground_intensity;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Color);
-}*/
 void SetColor(int foreground, int background)
 {
 	int f = foreground / 10 % 10;
@@ -91,7 +68,7 @@ void SetColor(int foreground, int background)
 }
 
 /*
-CursorVisibility(int visibility)
+SetCursorVisibility(int visibility)
  Changes console cursor visibility using SetConsoleCursorInfo (windows.h)
  https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo
 
@@ -100,7 +77,7 @@ CursorVisibility(int visibility)
   1: visible
   default: visible
 */
-void CursorVisibility(int visibility)
+void SetCursorVisibility(int visibility)
 {
 	CONSOLE_CURSOR_INFO cursor;
 	//dwSize: "The percentage of the character cell that is filled by the cursor. This value is between 1 and 100."

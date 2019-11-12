@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../cmd.h"
+#include "../kaliumn.h"
 int main(void)
 {
 	int i, j;

@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "../cmd.h"
+#include "../kaliumn.h"
 
 int main(void)
 {
