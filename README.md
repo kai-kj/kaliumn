@@ -50,16 +50,14 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 > ### Bouncing ball
 >
-> ![ball-gif](assets/ball.gif)
+> ![ball-gif](assets/bouncingBall.gif)
 >
 > <details><summary>main.c</summary>
 >
 > ```c
-> 
 > #include <stdlib.h>
 > #include <stdio.h>
 > #include "../kaliumn.h"
-> 
 > int main(void)
 > {
 > 	int x, y;
@@ -68,14 +66,15 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 	int xDirection = 0;
 > 	int yDirection = 0;
 > 	char fpsChar[100];
-> 	int *player = LoadTexture("texture");;
+> 	int *player = LoadTexture("texture");
+> 	//Initialize Canvas
 > 	Startup((WIDTH) * 2, HEIGHT, "test");
 > 	InitCanvas(WIDTH, HEIGHT, 71);
 > 	x = 0;
 > 	y = 0;
 > 	while(1)
 > 	{
-> 		SetColor(71, 0);
+> 		//Collision + Movement
 > 		if(x == 0)
 > 		{
 > 			xDirection = 0;
@@ -100,6 +99,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 		{
 > 			x--;
 > 		}
+> 
 > 		if(yDirection == 0)
 > 		{
 > 			y++;
@@ -108,11 +108,14 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 		{
 > 			y--;
 > 		}
+> 		//Clean canvas
 > 		CleanCanvas(71);
+> 		//Draw ball and fps
 > 		DrawTexture(player, x, y);
 > 		sprintf(fpsChar, "fps: %f", GetFPS());
 > 		DrawChar(fpsChar, 40, 0, 0);
-> 		Display();
+> 		//Display canvas to screen
+> 		Display(););
 > 	}
 > }
 > ```
