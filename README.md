@@ -62,7 +62,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > int main(void)
 > {
 > 	int x = 0;
->     int y = 0;
+>   int y = 0;
 > 	int WIDTH = 50;
 > 	int HEIGHT = 30;
 > 	int xDirection = 0;
@@ -74,7 +74,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 	
 > 	while(1)
 > 	{
-> 	    //Collisions
+> 	  //Collisions
 > 		if(x == 0)
 > 		{
 > 			xDirection = 0;
