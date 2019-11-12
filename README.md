@@ -50,7 +50,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 > ### Bouncing ball
 >
-> ![ball-gif](assets/ball.gif)
+> ![ball-gif](assets/bouncingBall.gif)
 >
 > <details><summary>main.c</summary>
 >
