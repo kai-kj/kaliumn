@@ -1,6 +1,6 @@
 # **cmd.h**
 
-A simple header file that makes it easier to develop Windows console applications with c.
+A simple single header file library that makes it easier to develop Windows console applications with c.
 
 You can easily change console window properties, play sounds, and display images.
 
