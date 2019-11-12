@@ -1,4 +1,4 @@
-# **cmd.h**
+# **Kaliumn**
 
 A simple single header file library that makes it easier to develop Windows console applications with c.
 
