@@ -55,11 +55,9 @@ gcc [file-name].c -o [file-name] -lwinmm
 > <details><summary>main.c</summary>
 >
 > ```c
-> 
 > #include <stdlib.h>
 > #include <stdio.h>
 > #include "../kaliumn.h"
-> 
 > int main(void)
 > {
 > 	int x, y;
@@ -69,14 +67,14 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 	int yDirection = 0;
 > 	char fpsChar[100];
 > 	int *player = LoadTexture("texture");
->   //Initialize Canvas
+> 	//Initialize Canvas
 > 	Startup((WIDTH) * 2, HEIGHT, "test");
 > 	InitCanvas(WIDTH, HEIGHT, 71);
 > 	x = 0;
 > 	y = 0;
 > 	while(1)
 > 	{
->     //Collision + Movement
+> 		//Collision + Movement
 > 		if(x == 0)
 > 		{
 > 			xDirection = 0;
@@ -101,6 +99,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 		{
 > 			x--;
 > 		}
+> 
 > 		if(yDirection == 0)
 > 		{
 > 			y++;
@@ -109,14 +108,14 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 		{
 > 			y--;
 > 		}
->     //Clean canvas
+> 		//Clean canvas
 > 		CleanCanvas(71);
->     //Draw ball and fps
+> 		//Draw ball and fps
 > 		DrawTexture(player, x, y);
 > 		sprintf(fpsChar, "fps: %f", GetFPS());
 > 		DrawChar(fpsChar, 40, 0, 0);
->     //Display canvas to screen
-> 		Display();
+> 		//Display canvas to screen
+> 		Display(););
 > 	}
 > }
 > ```
