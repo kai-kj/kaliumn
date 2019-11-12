@@ -76,7 +76,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 	y = 0;
 > 	while(1)
 > 	{
->     // Collision + Movement
+>     //Collision + Movement
 > 		if(x == 0)
 > 		{
 > 			xDirection = 0;
