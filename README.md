@@ -1,12 +1,8 @@
 <p align="center">
   <img src="assets/kaliumn.png" alt="Logo" width="160" height="160">
   <h1 align="center">kaliumn</h1>
+  <p align="center">A simple single header file library that makes it easier to develop Windows console applications with c</p>
 </p>
-
-
-A simple single header file library that makes it easier to develop Windows console applications with c.
-
-You can easily change console window properties, play sounds, and display images.
 
 ## Compiling
 
