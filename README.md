@@ -4,7 +4,7 @@
   <p align="center">A simple single header file library that makes it easier to develop Windows console applications with c</p>
 </p>
 
-#### Compiling
+### Compiling
 
 Include kaliumn.h with your project and link *winmm* when compiling.
 
@@ -20,13 +20,13 @@ When compiling (MinGW):
 gcc [file-name].c -o [file-name] -lwinmm
 ```
 
-#### Usage 
+### Usage 
 
 *Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).* 
 
-#### Examples
+### Examples
 
-> ##### Play sound
+> #### Play sound
 >
 > <details><summary>main.c</summary>
 >
@@ -48,7 +48,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > ```
 > </details>
 
-> ##### Bouncing ball
+> #### Bouncing ball
 >
 > ![ball-gif](assets/bouncingBall.gif)
 >
@@ -136,11 +136,11 @@ gcc [file-name].c -o [file-name] -lwinmm
 > ```
 > </details>
 
-#### Texture Editor
+### Texture Editor
 The Texture Editor can bu used to easily make textures that can be used by Draw().    
 *Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki) for more imformation.* 
 
-#### Contributing
+### Contributing
 Any contributions are **greatly appreciated**.
 
 1. Fork the Project
