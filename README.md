@@ -1,8 +1,13 @@
 <p align="center">
   <img src="assets/kaliumn.png" alt="Logo" width="80" height="80">
-  <h3 align="center">kaliumn</h1>
+  <h3 align="center"><b>kaliumn</b></h1>
   <p align="center">A simple single header file library that makes it easier to develop Windows console applications with c</p>
+  <p alsign="center">
+  <img src="https://img.shields.io/github/license/k390983/kaliumn">
+  </p>
 </p>
+
+<br>
 
 ### Compiling
 
