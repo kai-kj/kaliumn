@@ -3,7 +3,7 @@
   <h3 align="center"><b>kaliumn</b></h1>
   <p align="center">A simple single header file library that makes it easier to develop Windows console applications with c</p>
   <p alsign="center">
-  <img src="https://img.shields.io/github/license/k390983/kaliumn">
+  <img src="https://img.shields.io/github/license/k390983/kaliumn"> <img src="https://img.shields.io/github/repo-size/k390983/kaliumn"> <img src="https://img.shields.io/github/issues/k390983/kaliumn"> <img src="https://img.shields.io/badge/platform-windows-blue">
   </p>
 </p>
 
@@ -25,9 +25,9 @@ When compiling (MinGW):
 gcc [file-name].c -o [file-name] -lwinmm
 ```
 
-### Usage 
+### Usage
 
-*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).* 
+*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).*
 
 ### Examples
 
@@ -49,7 +49,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 >     Sleep(1000);
 >     StopAudio("sound.mp3");
 > }
-> 
+>
 > ```
 > </details>
 
@@ -104,7 +104,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 		{
 > 			x--;
 > 		}
-> 
+>
 > 		if(yDirection == 0)
 > 		{
 > 			y++;
@@ -130,20 +130,20 @@ gcc [file-name].c -o [file-name] -lwinmm
 >
 > ```c
 > 8, 8
-> 99 99 41 41 41 41 99 99 
-> 99 41 41 41 41 41 41 99 
-> 41 41 41 41 41 41 41 41 
-> 41 41 41 41 41 41 41 40 
-> 41 41 41 41 41 41 40 40 
-> 40 40 41 41 40 40 40 40 
-> 99 40 40 40 40 40 40 99 
-> 99 99 40 40 40 40 99 99 
+> 99 99 41 41 41 41 99 99
+> 99 41 41 41 41 41 41 99
+> 41 41 41 41 41 41 41 41
+> 41 41 41 41 41 41 41 40
+> 41 41 41 41 41 41 40 40
+> 40 40 41 41 40 40 40 40
+> 99 40 40 40 40 40 40 99
+> 99 99 40 40 40 40 99 99
 > ```
 > </details>
 
 ### Texture Editor
 The Texture Editor can bu used to easily make textures that can be used by Draw().    
-*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki) for more imformation.* 
+*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki) for more imformation.*
 
 ### Contributing
 Any contributions are **greatly appreciated**.
@@ -157,4 +157,4 @@ Any contributions are **greatly appreciated**.
 ----
 
 k390983(https://github.com/k390983) - K2L8M8N1@gmail.com    
-Distributed under the MIT license. See `LICENSE` for more information. 
+Distributed under the MIT license. See `LICENSE` for more information.
