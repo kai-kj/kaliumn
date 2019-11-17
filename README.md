@@ -1,6 +1,6 @@
 <p align="center">
-  ![logo](assets/kaliumn.png)
-  # **Kaliumn**
+  <img src="assets/kaliumn.png" alt="Logo" width="160" height="160">
+  <h1 align="center">kaliumn</h1>
 </p>
 
 
