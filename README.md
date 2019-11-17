@@ -1,4 +1,8 @@
-# **Kaliumn**
+<p align="center">
+  ![logo](assets/kaliumn.png)
+  # **Kaliumn**
+</p>
+
 
 A simple single header file library that makes it easier to develop Windows console applications with c.
 
