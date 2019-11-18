@@ -20,11 +20,6 @@ int soundID;
 float lastDraw = 0;
 float fps;
 
-typedef struct{
-	int id;
-	char path[100];
-}Audio;
-
 float timeFromStart()
 {
 	clock_t time = clock();
@@ -214,13 +209,20 @@ void ScreenTitle(char title[100])
 	SetConsoleTitle(title);
 }
 
-void LoadAudio(Audio input, char path[100])
+/*
+LoadAudio(char path[100])
+ Loads mp3 file to int variable and prepares the sound to beused by other functions
+
+ char path[100]
+  path to audio file(mp3)
+*/
+int LoadAudio(char path[100])
 {
 	char open[100];
-	sprintf(open, "open %s type MPEGVideo alias %s", path, soundID);
-	sprintf(input.path, "%s", path);
-	input.id = soundID;
+	sprintf(open, "open %s type MPEGVideo alias %d", path, soundID);
+	mciSendString(open, NULL, 0, 0);
 	soundID++;
+	return(soundID - 1);
 }
 
 /*
@@ -228,35 +230,28 @@ PlayAudio(char path[100], int repeat)
  Uses mciSendString() to play sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
- char path
-  path to audio file(mp3)
+ int input
+  sound name(assign sound with LoadAudio())
 
  int repeat
   0: false
   1: true
   default: 0
 */
-void PlayAudio(char path[100], int repeat)
+void PlayAudio(int input, int repeat)
 {
 	char close[100];
-	char open[100];
 	char play[100];
 	if (repeat == 1)
 	{
-		sprintf(close, "close %s", path);
-		sprintf(open, "open %s type MPEGVideo alias %s", path, path);
-		sprintf(play, "play %s repeat", path);
+		sprintf(close, "close %d", input);
+		sprintf(play, "play %d repeat", input);
 	}
 	else
 	{
-		sprintf(close, "close %s", path);
-		sprintf(open, "open %s type MPEGVideo alias %s", path, path);
-		sprintf(play, "play %s", path);
+		sprintf(close, "close %d", input);
+		sprintf(play, "play %d", input);
 	}
-	//Close(sometimes sounds won't play the second time you want to play the same sound)
-	mciSendString(close, NULL, 0, 0);
-	//Open
-	mciSendString(open, NULL, 0, 0);
 	//Start
 	mciSendString(play, NULL, 0, 0);
 }
@@ -266,13 +261,13 @@ PauseAudio(char path[100])
  Uses mciSendString() to pause sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
- char path
-  path to audio file(mp3)
+ int input
+  sound name(assign sound with LoadAudio())
 */
-void PauseAudio(char path[100])
+void PauseAudio(int input)
 {
 	char pause[100];
-	sprintf(pause, "pause %s", path);
+	sprintf(pause, "pause %d", input);
 	mciSendString(pause, NULL, 0, 0);
 }
 
@@ -281,13 +276,13 @@ ResumeAudio(char path[100])
  Uses mciSendString() to resume paused sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
- char path
-  path to audio file(mp3)
+ int input
+  sound name(assign sound with LoadAudio())
 */
-void ResumeAudio(char path[100])
+void ResumeAudio(int input)
 {
 	char resume[100];
-	sprintf(resume, "resume %s", path);
+	sprintf(resume, "resume %d", input);
 	mciSendString(resume, NULL, 0, 0);
 }
 
@@ -296,13 +291,13 @@ StopAudio(char path[100])
  Uses mciSendString() to stop sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
- char path
-  path to audio file(mp3)
+ int input
+  sound name(assign sound with LoadAudio())
 */
-void StopAudio(char path[100])
+void StopAudio(int input)
 {
 	char stop[100];
-	sprintf(stop, "stop %s", path);
+	sprintf(stop, "stop %d", input);
 	mciSendString(stop, NULL, 0, 0);
 }
 
