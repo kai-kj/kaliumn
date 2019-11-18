@@ -16,8 +16,14 @@ Use the Texture Editor included in the "TextureEditor" folder to make sprites
 int *canvas;
 char *text;
 int *textColor;
+int soundID;
 float lastDraw = 0;
 float fps;
+
+typedef struct{
+	int id;
+	char path[100];
+}Audio;
 
 float timeFromStart()
 {
@@ -208,6 +214,15 @@ void ScreenTitle(char title[100])
 	SetConsoleTitle(title);
 }
 
+void LoadAudio(Audio input, char path[100])
+{
+	char open[100];
+	sprintf(open, "open %s type MPEGVideo alias %s", path, soundID);
+	sprintf(input.path, "%s", path);
+	input.id = soundID;
+	soundID++;
+}
+
 /*
 PlayAudio(char path[100], int repeat)
  Uses mciSendString() to play sounds.
@@ -298,9 +313,9 @@ void StopAudio(char path[100])
  Texture format (* = space)
 
   height,*width
-  [pixel 0, 0]*[pixel 1, 0]*[pixel 2, 0]* 
+  [pixel 0, 0]*[pixel 1, 0]*[pixel 2, 0]*
   [pixel 0, 1]*[pixel 1, 1]*[pixel 2, 1]*  . . .
-  [pixel 0, 2]*[pixel 1, 2]*[pixel 2, 2]* 
+  [pixel 0, 2]*[pixel 1, 2]*[pixel 2, 2]*
                    .
                    .
                    .
