@@ -14,9 +14,11 @@ Use the Texture Editor included in the "TextureEditor" folder to make sprites
 #include <time.h>
 
 int *canvas;
-int *previousFrame;
+int *previousCanvas;
 char *text;
+char *previousText;
 int *textColor;
+int *previousTextColor;
 int soundID;
 float lastDraw = 0;
 float fps;
@@ -397,9 +399,11 @@ void InitCanvas(int width, int height, int color)
 	int i, j;
 	//Variable length array
 	canvas = (int *)malloc((width * height + 2) * sizeof(int));
-	previousFrame = (int *)malloc((width * height) * sizeof(int));
+	previousCanvas = (int *)malloc((width * height) * sizeof(int));
 	text = (char *)malloc((width * height + 1) * sizeof(char));
+	previousText = (char *)malloc((width * height + 1) * sizeof(char));
 	textColor = (int *)malloc((width * height) * sizeof(int));
+	previousTextColor = (int *)malloc((width * height) * sizeof(int));
 	//The first element stores the width and the second the height
 	canvas[0] = width;
 	canvas[1] = height;
@@ -409,12 +413,15 @@ void InitCanvas(int width, int height, int color)
 		for(j = 0; j < width; ++j)
 		{
 			canvas[(i * width) + j + 2] = color;
-			previousFrame[(i * width) + j] = 99;
+			previousCanvas[(i * width) + j] = 99;
 			text[(i * width) + j] = '\0';
+			previousText[(i * width) + j] = '\0';
 			textColor[(i * width) + j] = 00;
+			previousTextColor[(i * width) + j] = 00;
 		}
 	}
 	text[width * height + 1] = '\0';
+	previousText[width * height + 1] = '\0';
 }
 
 /*
@@ -436,6 +443,7 @@ void CleanCanvas(int color)
 		for(j = 0; j < width; ++j)
 		{
 			canvas[(i * width) + j + 2] = color;
+			text[(i * width) + j] = '\0';
 		}
 	}
 }
@@ -554,15 +562,16 @@ void Display()
 			}
 			else
 			{
-				if(canvas[(i * x) + j + 2] != previousFrame[(i * x) + j])
+				if(canvas[(i * x) + j + 2] != previousCanvas[(i * x) + j] || text[(i * x) + j + 2] != previousText[(i * x) + j] || textColor[(i * x) + j + 2] != previousTextColor[(i * x) + j])
 				{
 					SetCursorPosition(j * 2, i);
 					SetColor(0, canvas[(i * x) + j + 2]);
 					printf("  ");
 				}
 			}
-
-			previousFrame[(i * x) + j] = canvas[(i * x) + j + 2];
+			previousCanvas[(i * x) + j] = canvas[(i * x) + j + 2];
+			previousText[(i * x) + j] = text[(i * x) + j];
+			previousTextColor[(i * x) + j] = textColor[(i * x) + j];
 		}
 		if(i < y - 1)
 		{

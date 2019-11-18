@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../kaliumn.h"
+#include "../../kaliumn.h"
 int main(void)
 {
     Startup(40, 20, "soundDemo");

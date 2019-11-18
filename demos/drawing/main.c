@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../kaliumn.h"
+#include "../../kaliumn.h"
 #define SPEED 0.1
 int main(void)
 {
