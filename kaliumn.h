@@ -141,6 +141,27 @@ Startup(int width, int height, char title)
  char title
   console title
 */
+
+
+int GetMousePositionX()
+{
+	POINT p;
+	HWND hWnd = GetForegroundWindow();
+	GetCursorPos(&p);
+	ScreenToClient(hWnd, &p);
+	return(p.x);
+}
+
+int GetMousePositionY()
+{
+	POINT p;
+	HWND hWnd = GetForegroundWindow();
+	GetCursorPos(&p);
+	ScreenToClient(hWnd, &p);
+	return(p.y);
+}
+
+
 void Startup(int width, int height, char title[100])
 {
 	char screenSize[100];
