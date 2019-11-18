@@ -211,7 +211,7 @@ void ScreenTitle(char title[100])
 
 /*
 LoadAudio(char path[100])
- Loads mp3 file to int variable and prepares the sound to beused by other functions
+ Loads mp3 file to int and prepares the sound to be used by other functions
 
  char path[100]
   path to audio file(mp3)
