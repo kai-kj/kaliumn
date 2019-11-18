@@ -7,8 +7,8 @@ int main(void)
     int x, y;
     while (1)
     {
-        x = GetMousePositionX() / 8;
-        y = GetMousePositionY() / 16;
+        x = GetMousePositionX();
+        y = GetMousePositionY();
         system("cls");
         printf("%d, %d", x, y);
     }

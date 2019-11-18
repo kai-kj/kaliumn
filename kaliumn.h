@@ -127,6 +127,32 @@ void SetCursorPosition(int x, int y)
 }
 
 /*
+GetMousePositionX()
+ Returns x mouse position
+*/
+int GetMousePositionX()
+{
+	POINT p;
+	HWND hWnd = GetForegroundWindow();
+	GetCursorPos(&p);
+	ScreenToClient(hWnd, &p);
+	return(p.x / 8);
+}
+
+/*
+GetMousePositionX()
+ Returns y mouse position
+*/
+int GetMousePositionY()
+{
+	POINT p;
+	HWND hWnd = GetForegroundWindow();
+	GetCursorPos(&p);
+	ScreenToClient(hWnd, &p);
+	return(p.y / 16);
+}
+
+/*
 Startup(int width, int height, char title)
  Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
 
@@ -141,27 +167,6 @@ Startup(int width, int height, char title)
  char title
   console title
 */
-
-
-int GetMousePositionX()
-{
-	POINT p;
-	HWND hWnd = GetForegroundWindow();
-	GetCursorPos(&p);
-	ScreenToClient(hWnd, &p);
-	return(p.x);
-}
-
-int GetMousePositionY()
-{
-	POINT p;
-	HWND hWnd = GetForegroundWindow();
-	GetCursorPos(&p);
-	ScreenToClient(hWnd, &p);
-	return(p.y);
-}
-
-
 void Startup(int width, int height, char title[100])
 {
 	char screenSize[100];
