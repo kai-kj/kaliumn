@@ -58,6 +58,6 @@ int main(void)
 		sprintf(fpsChar, "fps: %f", GetFPS());
 		DrawChar(fpsChar, 40, 0, 0);
 		//Display canvas to screen
-		Display(););
+		Display();
 	}
 }

@@ -14,6 +14,7 @@ Use the Texture Editor included in the "TextureEditor" folder to make sprites
 #include <time.h>
 
 int *canvas;
+int *previousFrame;
 char *text;
 int *textColor;
 int soundID;
@@ -370,6 +371,7 @@ void InitCanvas(int width, int height, int color)
 	int i, j;
 	//Variable length array
 	canvas = (int *)malloc((width * height + 2) * sizeof(int));
+	previousFrame = (int *)malloc((width * height) * sizeof(int));
 	text = (char *)malloc((width * height + 1) * sizeof(char));
 	textColor = (int *)malloc((width * height) * sizeof(int));
 	//The first element stores the width and the second the height
@@ -381,6 +383,7 @@ void InitCanvas(int width, int height, int color)
 		for(j = 0; j < width; ++j)
 		{
 			canvas[(i * width) + j + 2] = color;
+			previousFrame[(i * width) + j] = 99;
 			text[(i * width) + j] = '\0';
 			textColor[(i * width) + j] = 00;
 		}
@@ -519,14 +522,21 @@ void Display()
 		{
 			if(text[(i * x) + j] != '\0')
 			{
+				SetCursorPosition(j * 2, i);
 				SetColor(textColor[(i * x) + j], canvas[(i * x) + j + 2]);
 				printf("%c ", text[(i * x) + j]);
 			}
 			else
 			{
-				SetColor(0, canvas[(i * x) + j + 2]);
-				printf("  ");
+				if(canvas[(i * x) + j + 2] != previousFrame[(i * x) + j])
+				{
+					SetCursorPosition(j * 2, i);
+					SetColor(0, canvas[(i * x) + j + 2]);
+					printf("  ");
+				}
 			}
+
+			previousFrame[(i * x) + j] = canvas[(i * x) + j + 2];
 		}
 		if(i < y - 1)
 		{
