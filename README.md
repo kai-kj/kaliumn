@@ -72,7 +72,8 @@ gcc [file-name].c -o [file-name] -lwinmm
 > ```c
 > #include <stdlib.h>
 > #include <stdio.h>
-> #include "kaliumn.h"
+> #include "../kaliumn.h"
+> #define SPEED 0.1
 > int main(void)
 > {
 > 	int x, y;
@@ -82,6 +83,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 	int yDirection = 0;
 > 	char fpsChar[100];
 > 	int *player = LoadTexture("texture");
+> 	float lastFrame = 0;
 > 	//Initialize Canvas
 > 	Startup((WIDTH) * 2, HEIGHT, "test");
 > 	InitCanvas(WIDTH, HEIGHT, 71);
@@ -89,39 +91,43 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 	y = 0;
 > 	while(1)
 > 	{
-> 		//Collision + Movement
-> 		if(x == 0)
+> 		if(GetTime() - lastFrame > SPEED)
 > 		{
-> 			xDirection = 0;
-> 		}
-> 		if(x + player[0] == WIDTH)
-> 		{
-> 			xDirection = 1;
-> 		}
-> 		if(y == 0)
-> 		{
-> 			yDirection = 0;
-> 		}
-> 		if(y + player[1] == HEIGHT)
-> 		{
-> 			yDirection = 1;
-> 		}
-> 		if(xDirection == 0)
-> 		{
-> 			x++;
-> 		}
-> 		else
-> 		{
-> 			x--;
-> 		}
+> 			lastFrame = GetTime();
+> 			//Collision + Movement
+> 			if(x == 0)
+> 			{
+> 				xDirection = 0;
+> 			}
+> 			if(x + player[0] == WIDTH)
+> 			{
+> 				xDirection = 1;
+> 			}
+> 			if(y == 0)
+> 			{
+> 				yDirection = 0;
+> 			}
+> 			if(y + player[1] == HEIGHT)
+> 			{
+> 				yDirection = 1;
+> 			}
+> 			if(xDirection == 0)
+> 			{
+> 				x++;
+> 			}
+> 			else
+> 			{
+> 				x--;
+> 			}
 >
-> 		if(yDirection == 0)
-> 		{
-> 			y++;
-> 		}
-> 		else
-> 		{
-> 			y--;
+> 			if(yDirection == 0)
+> 			{
+> 				y++;
+> 			}
+> 			else
+> 			{
+> 				y--;
+> 			}
 > 		}
 > 		//Clean canvas
 > 		CleanCanvas(71);
@@ -130,7 +136,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 		sprintf(fpsChar, "fps: %f", GetFPS());
 > 		DrawChar(fpsChar, 40, 0, 0);
 > 		//Display canvas to screen
-> 		Display(););
+> 		Display();
 > 	}
 > }
 > ```
@@ -147,7 +153,7 @@ gcc [file-name].c -o [file-name] -lwinmm
 > 41 41 41 41 41 41 40 40
 > 40 40 41 41 40 40 40 40
 > 99 40 40 40 40 40 40 99
-> 99 99 40 40 40 40 99 99 
+> 99 99 40 40 40 40 99 99
 > ```
 > </details>
 

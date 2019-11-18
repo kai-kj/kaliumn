@@ -21,7 +21,7 @@ int soundID;
 float lastDraw = 0;
 float fps;
 
-float timeFromStart()
+float GetTime()
 {
 	clock_t time = clock();
 	return (double)time / CLOCKS_PER_SEC;
@@ -507,9 +507,9 @@ void Display()
 {
 	int i, j;
 	//Log fps
-	float currentTime = timeFromStart();
+	float currentTime = GetTime();
 	fps = 1 / (currentTime - lastDraw);
-	lastDraw = timeFromStart();
+	lastDraw = GetTime();
 	//Get width and height
 	int x = canvas[0];
 	int y = canvas[1];
