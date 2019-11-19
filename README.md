@@ -29,135 +29,17 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ### Usage
 
-*Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki).*
+*Please refer to [Wiki/Basics](https://github.com/k390983/kaliumn/wiki#basicschange-the-text-color).*
 
 ### Examples
 
-> #### Play sound
->
-> <details><summary>main.c</summary>
->
-> ```c
-> #include <stdlib.h>
-> #include <stdio.h>
-> #include "kaliumn.h"
-> int main(void)
-> {
->     Startup(40, 20, "soundDemo");
->     int music;
->     music = LoadAudio("music.mp3");
->     printf("playing music\n");
->     PlayAudio(music, 0);
->     Sleep(5000);
->     printf("pausing music\n");
->     PauseAudio(music);
->     Sleep(5000);
->     printf("resuming music\n");
->     ResumeAudio(music);
->     Sleep(5000);
->     printf("stopping music\n\n");
->     StopAudio(music);
->     printf("press ENTER to finish\n");
->     getchar();
-> }
-> ```
-> </details>
+<p align="center"><img src="assets/mousepos.gif" alt="mouse position"><br><b>get mouse position relative to screen</b></p>
+<p align="center"><img src="assets/bouncingBall.gif" alt="bouncing ball"><br><b>display and animate textures with high fps</b></p>
+<p align="center"><img src="assets/calculator.gif" alt="calculator"><br><b>make a simple gui with minimal code</b></p>
 
-> #### Bouncing ball
->
-> ![ball-gif](assets/bouncingBall.gif)
->
-> <details><summary>main.c</summary>
->
-> ```c
-> #include <stdlib.h>
-> #include <stdio.h>
-> #include "../kaliumn.h"
-> #define SPEED 0.1
-> int main(void)
-> {
-> 	int x, y;
-> 	int WIDTH = 50;
-> 	int HEIGHT = 30;
-> 	int xDirection = 0;
-> 	int yDirection = 0;
-> 	char fpsChar[100];
-> 	int *player = LoadTexture("texture");
-> 	float lastFrame = 0;
-> 	//Initialize Canvas
-> 	Startup((WIDTH) * 2, HEIGHT, "test");
-> 	InitCanvas(WIDTH, HEIGHT, 71);
-> 	x = 0;
-> 	y = 0;
-> 	while(1)
-> 	{
-> 		if(GetTime() - lastFrame > SPEED)
-> 		{
-> 			lastFrame = GetTime();
-> 			//Collision + Movement
-> 			if(x == 0)
-> 			{
-> 				xDirection = 0;
-> 			}
-> 			if(x + player[0] == WIDTH)
-> 			{
-> 				xDirection = 1;
-> 			}
-> 			if(y == 0)
-> 			{
-> 				yDirection = 0;
-> 			}
-> 			if(y + player[1] == HEIGHT)
-> 			{
-> 				yDirection = 1;
-> 			}
-> 			if(xDirection == 0)
-> 			{
-> 				x++;
-> 			}
-> 			else
-> 			{
-> 				x--;
-> 			}
->
-> 			if(yDirection == 0)
-> 			{
-> 				y++;
-> 			}
-> 			else
-> 			{
-> 				y--;
-> 			}
-> 		}
-> 		//Clean canvas
-> 		CleanCanvas(71);
-> 		//Draw ball and fps
-> 		DrawTexture(player, x, y);
-> 		sprintf(fpsChar, "fps: %f", GetFPS());
-> 		DrawChar(fpsChar, 40, 0, 0);
-> 		//Display canvas to screen
-> 		Display();
-> 	}
-> }
-> ```
-> </details>
->  
-> <details><summary>texture</summary>
->
-> ```c
-> 8, 8
-> 99 99 41 41 41 41 99 99
-> 99 41 41 41 41 41 41 99
-> 41 41 41 41 41 41 41 41
-> 41 41 41 41 41 41 41 40
-> 41 41 41 41 41 41 40 40
-> 40 40 41 41 40 40 40 40
-> 99 40 40 40 40 40 40 99
-> 99 99 40 40 40 40 99 99
-> ```
-> </details>
+*For more examples and code see [Wiki/Examples](https://github.com/k390983/kaliumn/wiki/Examples).*
 
-### Texture Editor
+### Texture Editor (wip)
 The Texture Editor can bu used to easily make textures that can be used by Draw().    
 *Please refer to the [Wiki](https://github.com/k390983/cmd.h/wiki) for more imformation.*
 

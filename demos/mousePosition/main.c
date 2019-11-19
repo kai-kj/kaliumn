@@ -3,10 +3,12 @@
 #include "../../kaliumn.h"
 int main(void)
 {
+    //initialize screen
     Startup(60, 30, "mousePositionDemo");
     int x, y;
     while (1)
     {
+        //get mouse position
         x = GetMousePositionX();
         y = GetMousePositionY();
         system("cls");

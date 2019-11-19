@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../../kaliumn.h"
+//textures
 int *zero, *one, *two, *three, *four, *five, *six, *seven, *eight, *nine;
 int *dec, *add, *sub, *multi, *divi, *enter, *clear;
 int beep;
@@ -10,13 +11,14 @@ int mouseX, mouseY;
 int mode = 0;
 double currentValue = 0;
 double previousValue = 0;
+//input numbers
 void Input(int input)
 {
-    if(decState == 0)
+    if(decState == 0) //above decimal point
     {
         currentValue = currentValue * 10 + input;
     }
-    else
+    else //below decimal point
     {
         float num = input;
         int i;
@@ -28,6 +30,7 @@ void Input(int input)
         decState++;
     }
 }
+//calculate awnser
 void Calculate()
 {
     switch(mode)
@@ -49,6 +52,7 @@ void Calculate()
         mode = 0;
     }
 }
+//c button
 void Reset()
 {
     decState = 0;
@@ -56,6 +60,7 @@ void Reset()
     currentValue = 0;
     previousValue = 0;
 }
+// mouse position and clicks
 void Control()
 {
     if((GetKeyState(VK_LBUTTON) & 0x8000))
@@ -66,6 +71,7 @@ void Control()
             mouseX = GetMousePositionX() / 2;
             mouseY = GetMousePositionY();
             PlayAudio(beep, 0);
+            //numbers
             if(mouseX > 6 - 1 && mouseX < 6 + 3 && mouseY > 23 - 1 && mouseY < 23 + 5)
             {
                 Input(0);
@@ -106,6 +112,7 @@ void Control()
             {
                 Input(9);
             }
+            //decimal point
             else if(mouseX > 11 - 1 && mouseX < 11 + 3 && mouseY > 23 - 1 && mouseY < 23 + 5)
             {
                 if(decState == 0)
@@ -113,24 +120,28 @@ void Control()
                     decState = 1;
                 }
             }
+            // add
             else if(mouseX > 15 - 1 && mouseX < 15 + 3 && mouseY > 23 - 1 && mouseY < 23 + 5)
             {
                 mode = 1;
                 previousValue = currentValue;
                 currentValue = 0;
             }
+            //substract
             else if(mouseX > 15 - 1 && mouseX < 15 + 3 && mouseY > 17 - 1 && mouseY < 5 + 17)
             {
                 mode = 2;
                 previousValue = currentValue;
                 currentValue = 0;
             }
+            //multiply
             else if(mouseX > 15 - 1 && mouseX < 15 + 3 && mouseY > 11 - 1 && mouseY < 11 + 5)
             {
                 mode = 3;
                 previousValue = currentValue;
                 currentValue = 0;
             }
+            //divide
             else if(mouseX > 15 - 1 && mouseX < 15 + 3 && mouseY > 5 - 1 && mouseY < 5 + 5)
             {
                 mode = 4;
@@ -164,13 +175,16 @@ void Draw()
     }
     int digits = i;
     CleanCanvas(01);
+    //draw display background
     for(i = 0; i < 23; ++i)
     {
         DrawPixel(00, i + 1, 1);
         DrawPixel(00, i + 1, 2);
         DrawPixel(00, i + 1, 3);
     }
+    //draw numbers to display
     DrawChar(value, 99, 24 - digits, 2);
+    //draw textures to canvas
     DrawTexture(zero, 6, 23);
     DrawTexture(one, 1, 17);
     DrawTexture(two, 6, 17);
@@ -193,8 +207,10 @@ void Draw()
 }
 int main()
 {
+    //initialize canvas and screen
     Startup(25 * 2, 29, "Calculator");
     InitCanvas(25, 29, 01);
+    //load textures
     zero = LoadTexture("assets/zero");
     one = LoadTexture("assets/one");
     two = LoadTexture("assets/two");
@@ -214,6 +230,7 @@ int main()
     clear = LoadTexture("assets/clear");
     beep = LoadAudio("assets/beep.mp3");
     currentValue = 0;
+    //main loop
     while(1)
     {
         Control();
