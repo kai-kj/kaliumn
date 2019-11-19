@@ -11,7 +11,7 @@
 
 <br><br>
 
-<p align="center">This library is still in a very early state. <b>Any feedback is welcome!</b></p>
+<p align="center">This library is still in a very early state. <b>Any feedback or sugestions are welcome!</b></p>
 
 <br>
 
