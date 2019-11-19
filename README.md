@@ -11,6 +11,8 @@
 
 <br>
 
+>This library is still in a very early state. **Any feedback is welcome!**
+
 ### Compiling
 
 Include kaliumn.h with your project and link *winmm* when compiling.
