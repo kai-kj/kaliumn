@@ -33,9 +33,9 @@ gcc [file-name].c -o [file-name] -lwinmm
 
 ### Examples
 
-<p align="center"><img src="assets/mousePos.gif" alt="mouse position" width="300px"><br><b>get mouse position relative to screen</b></p>
-<p align="center"><img src="assets/bouncingBall.gif" alt="bouncing ball"><br><b>display and animate textures with high fps</b></p>
-<p align="center"><img src="assets/calculator.gif" alt="calculator"><br><b>make a simple gui with minimal code</b></p>
+<p align="center"><img src="assets/mousePos.gif" alt="mouse position" width="300"/><br><b>get mouse position relative to screen</b></p>
+<p align="center"><img src="assets/bouncingBall.gif" alt="bouncing ball width="300"/><br><b>display and animate textures with high fps</b></p>
+<p align="center"><img src="assets/calculator.gif" alt="calculator" width="300"/><br><b>make a simple gui with minimal code</b></p>
 
 *For more examples and code see [Wiki/Examples](https://github.com/k390983/kaliumn/wiki/Examples).*
 
