@@ -9,9 +9,11 @@
 
 ----
 
-<br>
+<br><br>
 
->This library is still in a very early state. **Any feedback is welcome!**
+<p align="center">This library is still in a very early state. <b>Any feedback is welcome!</b></p>
+
+<br>
 
 ### Compiling
 
