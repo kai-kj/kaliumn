@@ -1,6 +1,5 @@
 /*
 cmd.h
-v0.21(2019-11-10)
 Please link the winmm.dll library(for mingw add "-lwinmm").
 
 Demos are included in the "demos" folder
