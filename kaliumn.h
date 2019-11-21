@@ -45,12 +45,12 @@ KAL_SetColor(int foreground, int backgrounds)
   default: 00
 
 */
-void KAL_SetColor(int foreground, int background)
+void KAL_SetColor(const int FOREGROUND, const int BACKGROUND)
 {
-	int f = foreground / 10 % 10;
-	int fi = foreground % 10;
-	int b = background / 10 % 10;
-	int bi = background % 10;
+	int f = FOREGROUND / 10 % 10;
+	int fi = FOREGROUND % 10;
+	int b = BACKGROUND / 10 % 10;
+	int bi = BACKGROUND % 10;
 	//Check inputs
 	if(f < 0 || f > 7)
 	{
@@ -83,13 +83,13 @@ KAL_SetCursorVisibility(int visibility)
   1: visible
   default: visible
 */
-void KAL_SetCursorVisibility(int visibility)
+void KAL_SetCursorVisibility(const int VISIBILITY)
 {
 	CONSOLE_CURSOR_INFO cursor;
 	//dwSize: "The percentage of the character cell that is filled by the cursor. This value is between 1 and 100."
 	//more info: https://docs.microsoft.com/en-us/windows/console/console-cursor-info-str
 	cursor.dwSize = 100;
-	if(visibility == 0)
+	if(VISIBILITY == 0)
 	{
 		cursor.bVisible = FALSE;
 	}
@@ -171,7 +171,7 @@ KAL_Startup(int width, int height, char title)
  char title
   console title
 */
-void KAL_Startup(int width, int height, char title[])
+void KAL_Startup(int width, int height, const char TITLE[])
 {
 	char KAL_ScreenSize[100];
 	//Check input
@@ -193,7 +193,7 @@ void KAL_Startup(int width, int height, char title[])
 	//Use UTF-8
 	system("chcp 65001");
 	//Set console title
-	SetConsoleTitle(title);
+	SetConsoleTitle(TITLE);
 	//Disable quick edit
 	SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), ENABLE_EXTENDED_FLAGS);
 	//Clear screen
@@ -235,9 +235,9 @@ KAL_ScreenTitle(char title[100])
  char title
   console title
 */
-void KAL_ScreenTitle(char title[])
+void KAL_ScreenTitle(const char TITLE[])
 {
-	SetConsoleTitle(title);
+	SetConsoleTitle(TITLE);
 }
 
 /*
@@ -247,10 +247,10 @@ KAL_LoadAudio(char path[100])
  char path[100]
   path to audio file(mp3)
 */
-int KAL_LoadAudio(char path[])
+int KAL_LoadAudio(const char TITLE[])
 {
 	char open[100];
-	sprintf(open, "open %s type MPEGVideo alias %d", path, KAL_soundID);
+	sprintf(open, "open %s type MPEGVideo alias %d", TITLE, KAL_soundID);
 	mciSendString(open, NULL, 0, 0);
 	KAL_soundID++;
 	return(KAL_soundID - 1);
@@ -269,19 +269,19 @@ KAL_PlayAudio(char path[100], int repeat)
   1: true
   default: 0
 */
-void KAL_PlayAudio(int input, int repeat)
+void KAL_PlayAudio(const int INPUT, const int REPEAT)
 {
 	char close[100];
 	char play[100];
-	if (repeat == 1)
+	if (REPEAT == 1)
 	{
-		sprintf(close, "close %d", input);
-		sprintf(play, "play %d repeat", input);
+		sprintf(close, "close %d", INPUT);
+		sprintf(play, "play %d repeat", INPUT);
 	}
 	else
 	{
-		sprintf(close, "close %d", input);
-		sprintf(play, "play %d", input);
+		sprintf(close, "close %d", INPUT);
+		sprintf(play, "play %d", INPUT);
 	}
 	//Start
 	mciSendString(play, NULL, 0, 0);
@@ -295,10 +295,10 @@ KAL_PauseAudio(char path[100])
  int input
   sound name(assign sound with KAL_LoadAudio())
 */
-void KAL_PauseAudio(int input)
+void KAL_PauseAudio(const int INPUT)
 {
 	char pause[100];
-	sprintf(pause, "pause %d", input);
+	sprintf(pause, "pause %d", INPUT);
 	mciSendString(pause, NULL, 0, 0);
 }
 
@@ -310,10 +310,10 @@ KAL_ResumeAudio(char path[100])
  int input
   sound name(assign sound with KAL_LoadAudio())
 */
-void KAL_ResumeAudio(int input)
+void KAL_ResumeAudio(const int INPUT)
 {
 	char resume[100];
-	sprintf(resume, "resume %d", input);
+	sprintf(resume, "resume %d", INPUT);
 	mciSendString(resume, NULL, 0, 0);
 }
 
@@ -325,10 +325,10 @@ KAL_StopAudio(char path[100])
  int input
   sound name(assign sound with KAL_LoadAudio())
 */
-void KAL_StopAudio(int input)
+void KAL_StopAudio(const int INPUT)
 {
 	char stop[100];
-	sprintf(stop, "stop %d", input);
+	sprintf(stop, "stop %d", INPUT);
 	mciSendString(stop, NULL, 0, 0);
 }
 
@@ -356,11 +356,11 @@ void KAL_StopAudio(int input)
  char path
   path to file
 */
-int *KAL_LoadTexture(char path[])
+int *KAL_LoadTexture(const char PATH[])
 {
 	int i, j;
 	int x, y;
-	FILE *fp = fopen(path,"r");
+	FILE *fp = fopen(PATH,"r");
 	fscanf(fp, "%d, %d", &x, &y);
 	//Variable length array
 	int *texture = (int *)malloc((x * y + 2) * sizeof(int));
@@ -396,34 +396,34 @@ KAL_InitCanvas(int width, int height, int color)
  int color
   background color for canvas
 */
-void KAL_InitCanvas(int width, int height, int color)
+void KAL_InitCanvas(const int WIDTH, const int HEIGHT, const int COLOR)
 {
 	int i, j;
 	//Variable length array
-	KAL_canvas = (int *)malloc((width * height + 2) * sizeof(int));
-	KAL_previousCanvas = (int *)malloc((width * height) * sizeof(int));
-	KAL_text = (char *)malloc((width * height + 1) * sizeof(char));
-	KAL_previousText = (char *)malloc((width * height + 1) * sizeof(char));
-	KAL_textColor = (int *)malloc((width * height) * sizeof(int));
-	KAL_previousTextColor = (int *)malloc((width * height) * sizeof(int));
+	KAL_canvas = (int *)malloc((WIDTH * HEIGHT + 2) * sizeof(int));
+	KAL_previousCanvas = (int *)malloc((WIDTH * HEIGHT) * sizeof(int));
+	KAL_text = (char *)malloc((WIDTH * HEIGHT + 1) * sizeof(char));
+	KAL_previousText = (char *)malloc((WIDTH * HEIGHT + 1) * sizeof(char));
+	KAL_textColor = (int *)malloc((WIDTH * HEIGHT) * sizeof(int));
+	KAL_previousTextColor = (int *)malloc((WIDTH * HEIGHT) * sizeof(int));
 	//The first element stores the width and the second the height
-	KAL_canvas[0] = width;
-	KAL_canvas[1] = height;
+	KAL_canvas[0] = WIDTH;
+	KAL_canvas[1] = HEIGHT;
 	//Initialize with background color
-	for(i = 0; i < height; ++i)
+	for(i = 0; i < HEIGHT; ++i)
 	{
-		for(j = 0; j < width; ++j)
+		for(j = 0; j < WIDTH; ++j)
 		{
-			KAL_canvas[(i * width) + j + 2] = color;
-			KAL_previousCanvas[(i * width) + j] = 99;
-			KAL_text[(i * width) + j] = '\0';
-			KAL_previousText[(i * width) + j] = '\0';
-			KAL_textColor[(i * width) + j] = 00;
-			KAL_previousTextColor[(i * width) + j] = 00;
+			KAL_canvas[(i * WIDTH) + j + 2] = COLOR;
+			KAL_previousCanvas[(i * WIDTH) + j] = 99;
+			KAL_text[(i * WIDTH) + j] = '\0';
+			KAL_previousText[(i * WIDTH) + j] = '\0';
+			KAL_textColor[(i * WIDTH) + j] = 00;
+			KAL_previousTextColor[(i * WIDTH) + j] = 00;
 		}
 	}
-	KAL_text[width * height + 1] = '\0';
-	KAL_previousText[width * height + 1] = '\0';
+	KAL_text[WIDTH * HEIGHT + 1] = '\0';
+	KAL_previousText[WIDTH * HEIGHT + 1] = '\0';
 }
 
 /*
@@ -433,7 +433,7 @@ KAL_KAL_CleanCanvas(int color)
  int color
   background color for canvas
 */
-void KAL_CleanCanvas(int color)
+void KAL_CleanCanvas(const const int COLOR)
 {
 	int i, j;
 	//Get width and height
@@ -444,7 +444,7 @@ void KAL_CleanCanvas(int color)
 	{
 		for(j = 0; j < width; ++j)
 		{
-			KAL_canvas[(i * width) + j + 2] = color;
+			KAL_canvas[(i * width) + j + 2] = COLOR;
 			KAL_text[(i * width) + j] = '\0';
 		}
 	}
@@ -463,12 +463,12 @@ KAL_DrawTexture(int *texture, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void KAL_DrawTexture(int *texture, int xPos, int yPos)
+void KAL_DrawTexture(const int *TEXTURE, const int XPOS, const int YPOS)
 {
 	int i, j;
 	//Get width and height of texture
-	int x = texture[0];
-	int y = texture[1];
+	int x = TEXTURE[0];
+	int y = TEXTURE[1];
 	//Get width of canvas
 	int width = KAL_canvas[0];
 	//Draw
@@ -476,9 +476,9 @@ void KAL_DrawTexture(int *texture, int xPos, int yPos)
 	{
 		for (int j = 0; j < x; ++j)
 		{
-			if(texture[(i * x) + j + 2] != 99)
+			if(TEXTURE[(i * x) + j + 2] != 99)
 			{
-				KAL_canvas[(i + yPos) * width + j + xPos + 2] = texture[(i * x) + j + 2];
+				KAL_canvas[(i + YPOS) * width + j + XPOS + 2] = TEXTURE[(i * x) + j + 2];
 			}
 		}
 	}
@@ -497,12 +497,12 @@ KAL_DrawPixel(int color, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void KAL_DrawPixel(int color, int xPos, int yPos)
+void KAL_DrawPixel(const int COLOR, const int XPOS, const int YPOS)
 {
 	//Get width of canvas
 	int width = KAL_canvas[0];
 	//Draw
-	KAL_canvas[yPos * width + xPos + 2] = color;
+	KAL_canvas[YPOS * width + XPOS + 2] = COLOR;
 }
 
 /*
@@ -521,16 +521,16 @@ KAL_DrawChar(char input[], int color, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void KAL_DrawChar(char input[], int color, int xPos, int yPos)
+void KAL_DrawChar(const char INPUT[], const int COLOR, const int XPOS, const int YPOS)
 {
 	int i = 0;
 	//Get width of canvas
 	int width = KAL_canvas[0];
 	//Draw
-	while(input[i] != '\0')
+	while(INPUT[i] != '\0')
 	{
-		KAL_text[yPos * width + i + xPos] = input[i];
-		KAL_textColor[yPos * width + i + xPos] = color;
+		KAL_text[YPOS * width + i + XPOS] = INPUT[i];
+		KAL_textColor[YPOS * width + i + XPOS] = COLOR;
 		i++;
 	}
 }
