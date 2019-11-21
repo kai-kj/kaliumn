@@ -10,18 +10,18 @@ int main(void)
 	int xDirection = 0;
 	int yDirection = 0;
 	char fpsChar[100];
-	int *player = LoadTexture("texture");
+	int *player = KAL_LoadTexture("texture");
 	float lastFrame = 0;
 	//Initialize Canvas
-	Startup((WIDTH) * 2, HEIGHT, "test");
-	InitCanvas(WIDTH, HEIGHT, 71);
+	KAL_Startup((WIDTH) * 2, HEIGHT, "test");
+	KAL_InitCanvas(WIDTH, HEIGHT, 71);
 	x = 0;
 	y = 0;
 	while(1)
 	{
-		if(GetTime() - lastFrame > SPEED)
+		if(KAL_GetTime() - lastFrame > SPEED)
 		{
-			lastFrame = GetTime();
+			lastFrame = KAL_GetTime();
 			//Collision + Movement
 			if(x == 0)
 			{
@@ -58,12 +58,12 @@ int main(void)
 			}
 		}
 		//Clean canvas
-		CleanCanvas(71);
+		KAL_CleanCanvas(71);
 		//Draw ball and fps
-		DrawTexture(player, x, y);
-		sprintf(fpsChar, "fps: %f", GetFPS());
-		DrawChar(fpsChar, 40, 0, 0);
+		KAL_DrawTexture(player, x, y);
+		sprintf(fpsChar, "fps: %f", KAL_GetFPS());
+		KAL_DrawChar(fpsChar, 40, 0, 0);
 		//Display canvas to screen
-		Display();
+		KAL_Display();
 	}
 }
