@@ -4,13 +4,13 @@
 int main(void)
 {
     //initialize screen
-    Startup(60, 30, "mousePositionDemo");
+    KAL_Startup(60, 30, "mousePositionDemo");
     int x, y;
     while (1)
     {
         //get mouse position
-        x = GetMousePositionX();
-        y = GetMousePositionY();
+        x = KAL_GetMousePositionX();
+        y = KAL_GetMousePositionY();
         system("cls");
         printf("%d, %d", x, y);
     }

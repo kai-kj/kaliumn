@@ -36,16 +36,16 @@ void Calculate()
     switch(mode)
     {
         case 1:
-            currentValue = currentValue + previousValue;
+            currentValue = previousValue + currentValue;
             break;
         case 2:
-            currentValue = currentValue - previousValue;
+            currentValue = previousValue - currentValue;
             break;
         case 3:
-            currentValue = currentValue * previousValue;
+            currentValue = previousValue * currentValue;
             break;
         case 4:
-            currentValue = currentValue / previousValue;
+            currentValue = previousValue / currentValue;
             break;
         default:
             break;
@@ -68,9 +68,9 @@ void Control()
         if(lButtonState == 0)
         {
             lButtonState = 1;
-            mouseX = GetMousePositionX() / 2;
-            mouseY = GetMousePositionY();
-            PlayAudio(beep, 0);
+            mouseX = KAL_GetMousePositionX() / 2;
+            mouseY = KAL_GetMousePositionY();
+            KAL_PlayAudio(beep, 0);
             //numbers
             if(mouseX > 6 - 1 && mouseX < 6 + 3 && mouseY > 23 - 1 && mouseY < 23 + 5)
             {
@@ -174,61 +174,61 @@ void Draw()
         i++;
     }
     int digits = i;
-    CleanCanvas(01);
+    KAL_CleanCanvas(01);
     //draw display background
     for(i = 0; i < 23; ++i)
     {
-        DrawPixel(00, i + 1, 1);
-        DrawPixel(00, i + 1, 2);
-        DrawPixel(00, i + 1, 3);
+        KAL_DrawPixel(00, i + 1, 1);
+        KAL_DrawPixel(00, i + 1, 2);
+        KAL_DrawPixel(00, i + 1, 3);
     }
     //draw numbers to display
-    DrawChar(value, 99, 24 - digits, 2);
+    KAL_DrawChar(value, 99, 24 - digits, 2);
     //draw textures to canvas
-    DrawTexture(zero, 6, 23);
-    DrawTexture(one, 1, 17);
-    DrawTexture(two, 6, 17);
-    DrawTexture(three, 11, 17);
-    DrawTexture(four, 1, 11);
-    DrawTexture(five, 6, 11);
-    DrawTexture(six, 11, 11);
-    DrawTexture(seven, 1, 5);
-    DrawTexture(eight, 6, 5);
-    DrawTexture(nine, 11, 5);
-    DrawTexture(dec, 11, 23);
-    DrawTexture(add, 15, 23);
-    DrawTexture(sub, 15, 17);
-    DrawTexture(multi, 15, 11);
-    DrawTexture(divi, 15, 5);
-    DrawTexture(enter, 21, 17);
-    DrawTexture(clear, 1, 23);
-    SetCursorPosition(0, 0);
-    Display();
+    KAL_DrawTexture(zero, 6, 23);
+    KAL_DrawTexture(one, 1, 17);
+    KAL_DrawTexture(two, 6, 17);
+    KAL_DrawTexture(three, 11, 17);
+    KAL_DrawTexture(four, 1, 11);
+    KAL_DrawTexture(five, 6, 11);
+    KAL_DrawTexture(six, 11, 11);
+    KAL_DrawTexture(seven, 1, 5);
+    KAL_DrawTexture(eight, 6, 5);
+    KAL_DrawTexture(nine, 11, 5);
+    KAL_DrawTexture(dec, 11, 23);
+    KAL_DrawTexture(add, 15, 23);
+    KAL_DrawTexture(sub, 15, 17);
+    KAL_DrawTexture(multi, 15, 11);
+    KAL_DrawTexture(divi, 15, 5);
+    KAL_DrawTexture(enter, 21, 17);
+    KAL_DrawTexture(clear, 1, 23);
+    KAL_SetCursorPosition(0, 0);
+    KAL_Display();
 }
 int main()
 {
     //initialize canvas and screen
-    Startup(25 * 2, 29, "Calculator");
-    InitCanvas(25, 29, 01);
+    KAL_Startup(25 * 2, 29, "Calculator");
+    KAL_InitCanvas(25, 29, 01);
     //load textures
-    zero = LoadTexture("assets/zero");
-    one = LoadTexture("assets/one");
-    two = LoadTexture("assets/two");
-    three = LoadTexture("assets/three");
-    four = LoadTexture("assets/four");
-    five = LoadTexture("assets/five");
-    six = LoadTexture("assets/six");
-    seven = LoadTexture("assets/seven");
-    eight = LoadTexture("assets/eight");
-    nine = LoadTexture("assets/nine");
-    dec = LoadTexture("assets/dec");
-    add = LoadTexture("assets/add");
-    sub = LoadTexture("assets/sub");
-    multi = LoadTexture("assets/multi");
-    divi = LoadTexture("assets/div");
-    enter = LoadTexture("assets/enter");
-    clear = LoadTexture("assets/clear");
-    beep = LoadAudio("assets/beep.mp3");
+    zero = KAL_LoadTexture("assets/zero");
+    one = KAL_LoadTexture("assets/one");
+    two = KAL_LoadTexture("assets/two");
+    three = KAL_LoadTexture("assets/three");
+    four = KAL_LoadTexture("assets/four");
+    five = KAL_LoadTexture("assets/five");
+    six = KAL_LoadTexture("assets/six");
+    seven = KAL_LoadTexture("assets/seven");
+    eight = KAL_LoadTexture("assets/eight");
+    nine = KAL_LoadTexture("assets/nine");
+    dec = KAL_LoadTexture("assets/dec");
+    add = KAL_LoadTexture("assets/add");
+    sub = KAL_LoadTexture("assets/sub");
+    multi = KAL_LoadTexture("assets/multi");
+    divi = KAL_LoadTexture("assets/div");
+    enter = KAL_LoadTexture("assets/enter");
+    clear = KAL_LoadTexture("assets/clear");
+    beep = KAL_LoadAudio("assets/beep.mp3");
     currentValue = 0;
     //main loop
     while(1)

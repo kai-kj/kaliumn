@@ -9,27 +9,30 @@ See "colors.png" for colors
 Use the Texture Editor included in the "TextureEditor" folder to make sprites
 */
 
+//includes
 #include <windows.h>
 #include <time.h>
 
-int *canvas;
-int *previousCanvas;
-char *text;
-char *previousText;
-int *textColor;
-int *previousTextColor;
-int soundID;
-float lastDraw = 0;
-float fps;
+//global variables
+int *KAL_canvas;
+int *KAL_previousCanvas;
+char *KAL_text;
+char *KAL_previousText;
+int *KAL_textColor;
+int *KAL_previousTextColor;
+int KAL_soundID;
+float KAL_lastDraw = 0;
+float KAL_fps;
 
-float GetTime()
+//returnes time
+float KAL_GetTime()
 {
 	clock_t time = clock();
 	return (double)time / CLOCKS_PER_SEC;
 }
 
 /*
-SetColor(int foreground, int backgrounds)
+KAL_SetColor(int foreground, int backgrounds)
  Sets console text Color using SetConsoleTextAttribute(windows.h)
  https://docs.microsoft.com/en-us/windows/console/setconsoletextattribute
 
@@ -42,7 +45,7 @@ SetColor(int foreground, int backgrounds)
   default: 00
 
 */
-void SetColor(int foreground, int background)
+void KAL_SetColor(int foreground, int background)
 {
 	int f = foreground / 10 % 10;
 	int fi = foreground % 10;
@@ -71,7 +74,7 @@ void SetColor(int foreground, int background)
 }
 
 /*
-SetCursorVisibility(int visibility)
+KAL_SetCursorVisibility(int visibility)
  Changes console cursor visibility using SetConsoleCursorInfo (windows.h)
  https://docs.microsoft.com/en-us/windows/console/setconsolecursorinfo
 
@@ -80,7 +83,7 @@ SetCursorVisibility(int visibility)
   1: visible
   default: visible
 */
-void SetCursorVisibility(int visibility)
+void KAL_SetCursorVisibility(int visibility)
 {
 	CONSOLE_CURSOR_INFO cursor;
 	//dwSize: "The percentage of the character cell that is filled by the cursor. This value is between 1 and 100."
@@ -98,9 +101,9 @@ void SetCursorVisibility(int visibility)
 }
 
 /*
-SetCursorPosition(int x, int y)
- Changes cursor position using SetConsoleSetCursorPosition (windows.h)
- https://docs.microsoft.com/en-us/windows/console/setconsoleSetCursorPosition
+KAL_SetCursorPosition(int x, int y)
+ Changes cursor position using SetConsoleKAL_SetCursorPosition (windows.h)
+ https://docs.microsoft.com/en-us/windows/console/setconsoleKAL_SetCursorPosition
 
  int x
   x coord (>= 0)
@@ -110,7 +113,7 @@ SetCursorPosition(int x, int y)
   y coord (>= 0)
   default: 0
 */
-void SetCursorPosition(int x, int y)
+void KAL_SetCursorPosition(int x, int y)
 {
 	//Check input
 	if(x < 0)
@@ -128,10 +131,10 @@ void SetCursorPosition(int x, int y)
 }
 
 /*
-GetMousePositionX()
+KAL_GetMousePositionX()
  Returns x mouse position
 */
-int GetMousePositionX()
+int KAL_GetMousePositionX()
 {
 	POINT p;
 	HWND hWnd = GetForegroundWindow();
@@ -141,10 +144,10 @@ int GetMousePositionX()
 }
 
 /*
-GetMousePositionX()
+KAL_GetMousePositionY()
  Returns y mouse position
 */
-int GetMousePositionY()
+int KAL_GetMousePositionY()
 {
 	POINT p;
 	HWND hWnd = GetForegroundWindow();
@@ -154,7 +157,7 @@ int GetMousePositionY()
 }
 
 /*
-Startup(int width, int height, char title)
+KAL_Startup(int width, int height, char title)
  Changes the screen size, hides the cursor, sets the console encoding to utf-8 and sets the console title
 
  int width
@@ -168,9 +171,9 @@ Startup(int width, int height, char title)
  char title
   console title
 */
-void Startup(int width, int height, char title[100])
+void KAL_Startup(int width, int height, char title[])
 {
-	char screenSize[100];
+	char KAL_ScreenSize[100];
 	//Check input
 	if(height < 0)
 	{
@@ -180,13 +183,13 @@ void Startup(int width, int height, char title[100])
 	{
 		width = 0;
 	}
-	sprintf(screenSize, "MODE %d, %d", width, height);
+	sprintf(KAL_ScreenSize, "MODE %d, %d", width, height);
 	//Clear screen
 	system("cls");
 	//Hide cursor
 	printf("\e[?25l");
 	//Set window size
-	system(screenSize);
+	system(KAL_ScreenSize);
 	//Use UTF-8
 	system("chcp 65001");
 	//Set console title
@@ -198,7 +201,7 @@ void Startup(int width, int height, char title[100])
 }
 
 /*
-ScreenSize(int width, int height)
+KAL_ScreenSize(int width, int height)
  Changes the screen size
 
  int width
@@ -209,7 +212,7 @@ ScreenSize(int width, int height)
   window height (characters) (>= 0)
   default: 0
 */
-void ScreenSize(int width, int height)
+void KAL_ScreenSize(int width, int height)
 {
 	char screenSize[100];
 	//Check input
@@ -226,47 +229,47 @@ void ScreenSize(int width, int height)
 }
 
 /*
-ScreenTitle(char title[100])
+KAL_ScreenTitle(char title[100])
  Changes the screen title
 
  char title
   console title
 */
-void ScreenTitle(char title[100])
+void KAL_ScreenTitle(char title[])
 {
 	SetConsoleTitle(title);
 }
 
 /*
-LoadAudio(char path[100])
+KAL_LoadAudio(char path[100])
  Loads mp3 file to int and prepares the sound to be used by other functions
 
  char path[100]
   path to audio file(mp3)
 */
-int LoadAudio(char path[100])
+int KAL_LoadAudio(char path[])
 {
 	char open[100];
-	sprintf(open, "open %s type MPEGVideo alias %d", path, soundID);
+	sprintf(open, "open %s type MPEGVideo alias %d", path, KAL_soundID);
 	mciSendString(open, NULL, 0, 0);
-	soundID++;
-	return(soundID - 1);
+	KAL_soundID++;
+	return(KAL_soundID - 1);
 }
 
 /*
-PlayAudio(char path[100], int repeat)
+KAL_PlayAudio(char path[100], int repeat)
  Uses mciSendString() to play sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
  int input
-  sound name(assign sound with LoadAudio())
+  sound name(assign sound with KAL_LoadAudio())
 
  int repeat
   0: false
   1: true
   default: 0
 */
-void PlayAudio(int input, int repeat)
+void KAL_PlayAudio(int input, int repeat)
 {
 	char close[100];
 	char play[100];
@@ -285,14 +288,14 @@ void PlayAudio(int input, int repeat)
 }
 
 /*
-PauseAudio(char path[100])
+KAL_PauseAudio(char path[100])
  Uses mciSendString() to pause sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
  int input
-  sound name(assign sound with LoadAudio())
+  sound name(assign sound with KAL_LoadAudio())
 */
-void PauseAudio(int input)
+void KAL_PauseAudio(int input)
 {
 	char pause[100];
 	sprintf(pause, "pause %d", input);
@@ -300,14 +303,14 @@ void PauseAudio(int input)
 }
 
 /*
-ResumeAudio(char path[100])
+KAL_ResumeAudio(char path[100])
  Uses mciSendString() to resume paused sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
  int input
-  sound name(assign sound with LoadAudio())
+  sound name(assign sound with KAL_LoadAudio())
 */
-void ResumeAudio(int input)
+void KAL_ResumeAudio(int input)
 {
 	char resume[100];
 	sprintf(resume, "resume %d", input);
@@ -315,14 +318,14 @@ void ResumeAudio(int input)
 }
 
 /*
-StopAudio(char path[100])
+KAL_StopAudio(char path[100])
  Uses mciSendString() to stop sounds.
  https://docs.microsoft.com/en-us/previous-versions/dd757161(v%3Dvs.85)
 
  int input
-  sound name(assign sound with LoadAudio())
+  sound name(assign sound with KAL_LoadAudio())
 */
-void StopAudio(int input)
+void KAL_StopAudio(int input)
 {
 	char stop[100];
 	sprintf(stop, "stop %d", input);
@@ -330,7 +333,7 @@ void StopAudio(int input)
 }
 
 /*
-*LoadTexture(char path[100])
+*KAL_LoadTexture(char path[100])
  Loads texture to *int to be drawn by Draw()
  Textures can be drawn using the TextureEditor Tool
  Texture format (* = space)
@@ -345,7 +348,7 @@ void StopAudio(int input)
 
   height: height of texture
   width: width of texture
-  [pixel x, y]: color code of pixel(same code as SetColor())
+  [pixel x, y]: color code of pixel(same code as KAL_SetColor())
    first digit: color
    second digit: intensity
   (99: transparent)
@@ -353,7 +356,7 @@ void StopAudio(int input)
  char path
   path to file
 */
-int *LoadTexture(char path[100])
+int *KAL_LoadTexture(char path[])
 {
 	int i, j;
 	int x, y;
@@ -381,7 +384,7 @@ int *LoadTexture(char path[100])
 }
 
 /*
-InitCanvas(int width, int height, int color)
+KAL_InitCanvas(int width, int height, int color)
  Initializes canvas to be displayed to the console
 
  int width
@@ -393,63 +396,63 @@ InitCanvas(int width, int height, int color)
  int color
   background color for canvas
 */
-void InitCanvas(int width, int height, int color)
+void KAL_InitCanvas(int width, int height, int color)
 {
 	int i, j;
 	//Variable length array
-	canvas = (int *)malloc((width * height + 2) * sizeof(int));
-	previousCanvas = (int *)malloc((width * height) * sizeof(int));
-	text = (char *)malloc((width * height + 1) * sizeof(char));
-	previousText = (char *)malloc((width * height + 1) * sizeof(char));
-	textColor = (int *)malloc((width * height) * sizeof(int));
-	previousTextColor = (int *)malloc((width * height) * sizeof(int));
+	KAL_canvas = (int *)malloc((width * height + 2) * sizeof(int));
+	KAL_previousCanvas = (int *)malloc((width * height) * sizeof(int));
+	KAL_text = (char *)malloc((width * height + 1) * sizeof(char));
+	KAL_previousText = (char *)malloc((width * height + 1) * sizeof(char));
+	KAL_textColor = (int *)malloc((width * height) * sizeof(int));
+	KAL_previousTextColor = (int *)malloc((width * height) * sizeof(int));
 	//The first element stores the width and the second the height
-	canvas[0] = width;
-	canvas[1] = height;
+	KAL_canvas[0] = width;
+	KAL_canvas[1] = height;
 	//Initialize with background color
 	for(i = 0; i < height; ++i)
 	{
 		for(j = 0; j < width; ++j)
 		{
-			canvas[(i * width) + j + 2] = color;
-			previousCanvas[(i * width) + j] = 99;
-			text[(i * width) + j] = '\0';
-			previousText[(i * width) + j] = '\0';
-			textColor[(i * width) + j] = 00;
-			previousTextColor[(i * width) + j] = 00;
+			KAL_canvas[(i * width) + j + 2] = color;
+			KAL_previousCanvas[(i * width) + j] = 99;
+			KAL_text[(i * width) + j] = '\0';
+			KAL_previousText[(i * width) + j] = '\0';
+			KAL_textColor[(i * width) + j] = 00;
+			KAL_previousTextColor[(i * width) + j] = 00;
 		}
 	}
-	text[width * height + 1] = '\0';
-	previousText[width * height + 1] = '\0';
+	KAL_text[width * height + 1] = '\0';
+	KAL_previousText[width * height + 1] = '\0';
 }
 
 /*
-CleanCanvas(int color)
+KAL_KAL_CleanCanvas(int color)
  Cleans canvas
 
  int color
   background color for canvas
 */
-void CleanCanvas(int color)
+void KAL_CleanCanvas(int color)
 {
 	int i, j;
 	//Get width and height
-	int width = canvas[0];
-	int height = canvas[1];
+	int width = KAL_canvas[0];
+	int height = KAL_canvas[1];
 	//Clean with background color
 	for(i = 0; i < height; ++i)
 	{
 		for(j = 0; j < width; ++j)
 		{
-			canvas[(i * width) + j + 2] = color;
-			text[(i * width) + j] = '\0';
+			KAL_canvas[(i * width) + j + 2] = color;
+			KAL_text[(i * width) + j] = '\0';
 		}
 	}
 }
 
 /*
-DrawTexture(int *texture, int xPos, int yPos)
- Draws texture to canvas (use between ClearCanvas() and Display())
+KAL_DrawTexture(int *texture, int xPos, int yPos)
+ Draws texture to canvas (use between ClearCanvas() and KAL_Display())
 
  int *texture
   texture to be drawn to canvas
@@ -460,14 +463,14 @@ DrawTexture(int *texture, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void DrawTexture(int *texture, int xPos, int yPos)
+void KAL_DrawTexture(int *texture, int xPos, int yPos)
 {
 	int i, j;
 	//Get width and height of texture
 	int x = texture[0];
 	int y = texture[1];
 	//Get width of canvas
-	int width = canvas[0];
+	int width = KAL_canvas[0];
 	//Draw
 	for(i = 0; i < y; ++i)
 	{
@@ -475,15 +478,15 @@ void DrawTexture(int *texture, int xPos, int yPos)
 		{
 			if(texture[(i * x) + j + 2] != 99)
 			{
-				canvas[(i + yPos) * width + j + xPos + 2] = texture[(i * x) + j + 2];
+				KAL_canvas[(i + yPos) * width + j + xPos + 2] = texture[(i * x) + j + 2];
 			}
 		}
 	}
 }
 
 /*
-DrawPixel(int color, int xPos, int yPos)
- Draws pixel to canvas (use between ClearCanvas() and Display())
+KAL_DrawPixel(int color, int xPos, int yPos)
+ Draws pixel to canvas (use between ClearCanvas() and KAL_Display())
 
  int color
   color of pixel
@@ -494,17 +497,17 @@ DrawPixel(int color, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void DrawPixel(int color, int xPos, int yPos)
+void KAL_DrawPixel(int color, int xPos, int yPos)
 {
 	//Get width of canvas
-	int width = canvas[0];
+	int width = KAL_canvas[0];
 	//Draw
-	canvas[yPos * width + xPos + 2] = color;
+	KAL_canvas[yPos * width + xPos + 2] = color;
 }
 
 /*
-DrawChar(char input[], int color, int xPos, int yPos)
- Draws text to canvas (use between ClearCanvas() and Display())
+KAL_DrawChar(char input[], int color, int xPos, int yPos)
+ Draws text to canvas (use between ClearCanvas() and KAL_Display())
 
  char input[]
   text to be drawn to canvas
@@ -518,59 +521,59 @@ DrawChar(char input[], int color, int xPos, int yPos)
  int yPos
   x position(The top left corner is the origin)
 */
-void DrawChar(char input[], int color, int xPos, int yPos)
+void KAL_DrawChar(char input[], int color, int xPos, int yPos)
 {
 	int i = 0;
 	//Get width of canvas
-	int width = canvas[0];
+	int width = KAL_canvas[0];
 	//Draw
 	while(input[i] != '\0')
 	{
-		text[yPos * width + i + xPos] = input[i];
-		textColor[yPos * width + i + xPos] = color;
+		KAL_text[yPos * width + i + xPos] = input[i];
+		KAL_textColor[yPos * width + i + xPos] = color;
 		i++;
 	}
 }
 
 /*
-Display()
- Displays canvas to console
+KAL_Display()
+ KAL_Displays canvas to console
 */
-void Display()
+void KAL_Display()
 {
 	int i, j;
 	//Log fps
-	float currentTime = GetTime();
-	fps = 1 / (currentTime - lastDraw);
-	lastDraw = GetTime();
+	float currentTime = KAL_GetTime();
+	KAL_fps = 1 / (currentTime - KAL_lastDraw);
+	KAL_lastDraw = KAL_GetTime();
 	//Get width and height
-	int x = canvas[0];
-	int y = canvas[1];
+	int x = KAL_canvas[0];
+	int y = KAL_canvas[1];
 	//Moves cursor to top left of the console to draw over previous frame (Using system("cls") makes the screen flicker)
-	SetCursorPosition(0, 0);
+	KAL_SetCursorPosition(0, 0);
 	//Draw
 	for(i = 0; i < y; ++i)
 	{
 		for (int j = 0; j < x; ++j)
 		{
-			if(text[(i * x) + j] != '\0')
+			if(KAL_text[(i * x) + j] != '\0')
 			{
-				SetCursorPosition(j * 2, i);
-				SetColor(textColor[(i * x) + j], canvas[(i * x) + j + 2]);
-				printf("%c ", text[(i * x) + j]);
+				KAL_SetCursorPosition(j * 2, i);
+				KAL_SetColor(KAL_textColor[(i * x) + j], KAL_canvas[(i * x) + j + 2]);
+				printf("%c ", KAL_text[(i * x) + j]);
 			}
 			else
 			{
-				if(canvas[(i * x) + j + 2] != previousCanvas[(i * x) + j] || text[(i * x) + j + 2] != previousText[(i * x) + j] || textColor[(i * x) + j + 2] != previousTextColor[(i * x) + j])
+				if(KAL_canvas[(i * x) + j + 2] != KAL_previousCanvas[(i * x) + j] || KAL_text[(i * x) + j + 2] != KAL_previousText[(i * x) + j] || KAL_textColor[(i * x) + j + 2] != KAL_previousTextColor[(i * x) + j])
 				{
-					SetCursorPosition(j * 2, i);
-					SetColor(0, canvas[(i * x) + j + 2]);
+					KAL_SetCursorPosition(j * 2, i);
+					KAL_SetColor(0, KAL_canvas[(i * x) + j + 2]);
 					printf("  ");
 				}
 			}
-			previousCanvas[(i * x) + j] = canvas[(i * x) + j + 2];
-			previousText[(i * x) + j] = text[(i * x) + j];
-			previousTextColor[(i * x) + j] = textColor[(i * x) + j];
+			KAL_previousCanvas[(i * x) + j] = KAL_canvas[(i * x) + j + 2];
+			KAL_previousText[(i * x) + j] = KAL_text[(i * x) + j];
+			KAL_previousTextColor[(i * x) + j] = KAL_textColor[(i * x) + j];
 		}
 		if(i < y - 1)
 		{
@@ -580,10 +583,10 @@ void Display()
 }
 
 /*
-GetFPS()
+KAL_GetFPS()
  Returns fps
 */
-float GetFPS()
+float KAL_GetFPS()
 {
-	return fps;
+	return KAL_fps;
 }
