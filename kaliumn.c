@@ -383,6 +383,18 @@ int *KAL_LoadTexture(const char PATH[])
 }
 
 /*
+KAL_DestroyTexture(int texture)
+ Frees memory used by texture
+
+ int texture
+  texture name
+*/
+void KAL_DestroyTexture(int *texture)
+{
+	free(texture);
+}
+
+/*
 KAL_InitCanvas(int width, int height, int color)
  Initializes canvas to be displayed to the console
 
