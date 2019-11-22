@@ -28,7 +28,7 @@ At the top of your c file:
 When compiling (MinGW):
 
 ```
-gcc [file-name].c -o [file-name] -lwinmm
+gcc [file-name].c kaliumn.c -o [file-name] -lwinmm
 ```
 
 ### Usage
