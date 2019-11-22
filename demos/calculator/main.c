@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../kaliumn.h"
+#include "kaliumn.h"
 //textures
 int *zero, *one, *two, *three, *four, *five, *six, *seven, *eight, *nine;
 int *dec, *add, *sub, *multi, *divi, *enter, *clear;
