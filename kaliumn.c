@@ -444,7 +444,7 @@ KAL_KAL_CleanCanvas(int color)
  int color
   background color for canvas
 */
-void KAL_CleanCanvas(const const int COLOR)
+void KAL_CleanCanvas(const int COLOR)
 {
 	int i, j;
 	//Get width and height
