@@ -34,6 +34,7 @@ void KAL_PauseAudio(const int INPUT);
 void KAL_ResumeAudio(const int INPUT);
 void KAL_StopAudio(const int INPUT);
 int *KAL_LoadTexture(const char PATH[]);
+void KAL_DestroyTexture(int *texture);
 void KAL_InitCanvas(const int WIDTH, const int HEIGHT, const int COLOR);
 void KAL_CleanCanvas(const const int COLOR);
 void KAL_DrawTexture(const int *TEXTURE, const int XPOS, const int YPOS);

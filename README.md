@@ -17,7 +17,7 @@
 
 ### Compiling
 
-Include kaliumn.h with your project and link *winmm* when compiling.
+Include kaliumn.c and kaliumn.h with your project and link *winmm* when compiling.
 
 At the top of your c file:
 
@@ -33,7 +33,7 @@ gcc [file-name].c kaliumn.c -o [file-name] -lwinmm
 
 ### Usage
 
-*Please refer to [Wiki/Basics](https://github.com/k390983/kaliumn/wiki#basicschange-the-text-color).*
+*Please refer to [Wiki/Basics](https://github.com/k390983/kaliumn/wiki#basicschange-the-text-color) and [Wiki/Functions](https://github.com/k390983/kaliumn/wiki/Functions).*
 
 ### Examples
 
