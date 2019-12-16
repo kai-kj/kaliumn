@@ -2,3 +2,5 @@
 *.txt
 #compile files
 *.bat
+#line endings
+text eol=crlf
