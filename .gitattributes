@@ -1,3 +1,9 @@
 * text eol=crlf
 
+*.c text
+*.h text
+
 *.png binary
+*.mp3 binary
+*.gif binary
+*.exe binary
