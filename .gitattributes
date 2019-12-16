@@ -1,7 +1,10 @@
-* text eol=crlf
+* text=auto
 
 *.c text
 *.h text
+*.md text
+
+*.kal text eol=crlf
 
 *.png binary
 *.mp3 binary

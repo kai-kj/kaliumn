@@ -211,24 +211,24 @@ int main()
     KAL_Startup(25 * 2, 29, "Calculator");
     KAL_InitCanvas(25, 29, 01);
     //load textures
-    zero = KAL_LoadTexture("assets/zero");
-    one = KAL_LoadTexture("assets/one");
-    two = KAL_LoadTexture("assets/two");
-    three = KAL_LoadTexture("assets/three");
-    four = KAL_LoadTexture("assets/four");
-    five = KAL_LoadTexture("assets/five");
-    six = KAL_LoadTexture("assets/six");
-    seven = KAL_LoadTexture("assets/seven");
-    eight = KAL_LoadTexture("assets/eight");
-    nine = KAL_LoadTexture("assets/nine");
-    dec = KAL_LoadTexture("assets/dec");
-    add = KAL_LoadTexture("assets/add");
-    sub = KAL_LoadTexture("assets/sub");
-    multi = KAL_LoadTexture("assets/multi");
-    divi = KAL_LoadTexture("assets/div");
-    enter = KAL_LoadTexture("assets/enter");
-    clear = KAL_LoadTexture("assets/clear");
-    beep = KAL_LoadAudio("assets/beep.mp3");
+    zero = KAL_LoadTexture("assets/zero.kal");
+    one = KAL_LoadTexture("assets/one.kal");
+    two = KAL_LoadTexture("assets/two.kal");
+    three = KAL_LoadTexture("assets/three.kal");
+    four = KAL_LoadTexture("assets/four.kal");
+    five = KAL_LoadTexture("assets/five.kal");
+    six = KAL_LoadTexture("assets/six.kal");
+    seven = KAL_LoadTexture("assets/seven.kal");
+    eight = KAL_LoadTexture("assets/eight.kal");
+    nine = KAL_LoadTexture("assets/nine.kal");
+    dec = KAL_LoadTexture("assets/dec.kal");
+    add = KAL_LoadTexture("assets/add.kal");
+    sub = KAL_LoadTexture("assets/sub.kal");
+    multi = KAL_LoadTexture("assets/multi.kal");
+    divi = KAL_LoadTexture("assets/div.kal");
+    enter = KAL_LoadTexture("assets/enter.kal");
+    clear = KAL_LoadTexture("assets/clear.kal");
+    beep = KAL_LoadAudio("assets/beep.mp3.kal");
     currentValue = 0;
     //main loop
     while(1)
