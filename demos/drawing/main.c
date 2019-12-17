@@ -10,7 +10,7 @@ int main(void)
 	int xDirection = 0;
 	int yDirection = 0;
 	char fpsChar[100];
-	int *player = KAL_LoadTexture("texture");
+	int *player = KAL_LoadTexture("texture.kal");
 	float lastFrame = 0;
 	//Initialize Canvas
 	KAL_Startup((WIDTH) * 2, HEIGHT, "test");
